@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12B21AA2-F3A1-4FE0-BFEB-4424E8347045}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SewingClothes</RootNamespace>
+    <AssemblyName>SewingClothes</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\Accessouries.cs" />
+    <Compile Include="Class\Clothes.cs" />
+    <Compile Include="Class\ClothesAccessories.cs" />
+    <Compile Include="Class\ClothesProperties.cs" />
+    <Compile Include="Class\ClothesType.cs" />
+    <Compile Include="Class\Customer.cs" />
+    <Compile Include="Class\DBBuf.cs" />
+    <Compile Include="Class\DBLists.cs" />
+    <Compile Include="Class\Delivery.cs" />
+    <Compile Include="Class\Fabric.cs" />
+    <Compile Include="Class\Order.cs" />
+    <Compile Include="Class\Payment.cs" />
+    <Compile Include="Forms\AccesouriesChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AccesouriesChoice.Designer.cs">
+      <DependentUpon>AccesouriesChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin.Designer.cs">
+      <DependentUpon>Admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminFabricChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminFabricChange.Designer.cs">
+      <DependentUpon>AdminFabricChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Bascket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Bascket.Designer.cs">
+      <DependentUpon>Bascket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FabricsChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FabricsChoice.Designer.cs">
+      <DependentUpon>FabricsChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InterfaceChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InterfaceChoice.Designer.cs">
+      <DependentUpon>InterfaceChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ClothesConstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\.Designer.cs">
+      <DependentUpon>ClothesConstructor.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacteristicsChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CharacteristicsChoice.Designer.cs">
+      <DependentUpon>CharacteristicsChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminOrderList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminOrderList.Designer.cs">
+      <DependentUpon>AdminOrderList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OrderRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderRegistration.Designer.cs">
+      <DependentUpon>OrderRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\AdminAccesouriesChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminAccesouriesChange.Designer.cs">
+      <DependentUpon>AdminAccesouriesChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RequestConstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RequestConstructor.Designer.cs">
+      <DependentUpon>RequestConstructor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\AccesouriesChoice.resx">
+      <DependentUpon>AccesouriesChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin.resx">
+      <DependentUpon>Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminFabricChange.resx">
+      <DependentUpon>AdminFabricChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Bascket.resx">
+      <DependentUpon>Bascket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ClothesConstructor.resx">
+      <DependentUpon>ClothesConstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CharacteristicsChoice.resx">
+      <DependentUpon>CharacteristicsChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FabricsChoice.resx">
+      <DependentUpon>FabricsChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InterfaceChoice.resx">
+      <DependentUpon>InterfaceChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminOrderList.resx">
+      <DependentUpon>AdminOrderList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderRegistration.resx">
+      <DependentUpon>OrderRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\AdminAccesouriesChange.resx">
+      <DependentUpon>AdminAccesouriesChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RequestConstructor.resx">
+      <DependentUpon>RequestConstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\supermarketbasket_89193.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12186-womans-clothes-icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
