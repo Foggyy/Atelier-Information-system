@@ -14,7 +14,8 @@ namespace SewingClothes
 
             DBBuf.FabricBuf = new Fabric();
             AmountFabricCalculate();
-            LoadAllFabrics();           
+            LoadAllFabrics();
+            LoadRecommendedAccessories();
         }
 
         private void buttonReturnMenu_Click(object sender, EventArgs e)
@@ -41,8 +42,16 @@ namespace SewingClothes
         /// </summary>
         public bool SaveFabric()
         {
-            int index ;
-            if (listViewAllFabrics.SelectedItems.Count == 1)
+            int index;
+            if (listViewRecommended.SelectedItems.Count == 1)
+            {
+                index = listViewRecommended.Items.IndexOf(listViewRecommended.SelectedItems[0]);
+                DBBuf.FabricBuf = DBLists.FabricListSupport[index];
+                DBBuf.AmountFabric = DBLists.FabricListSupport[index].Amount;
+                AmountFabricCalculate();
+                return true;
+            }
+            else if (listViewAllFabrics.SelectedItems.Count == 1)
             {
                 index = listViewAllFabrics.Items.IndexOf(listViewAllFabrics.SelectedItems[0]);
                 DBBuf.FabricBuf = DBLists.FabricList[index];
@@ -94,7 +103,60 @@ namespace SewingClothes
                         DBLists.FabricList.Add(Element);
                         listViewAllFabrics.Items.Add(new ListViewItem(Fabric));
                     }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        public void LoadRecommendedAccessories()
+        {
+            SqlConnection connection = new SqlConnection(Connection.connectionString);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                if (DBBuf.ClothesTypeBuf.Purpose == "Рубашка")
+                    command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
+                                      "Material = 'Лен' OR Material = 'Шелк' OR Material = 'Хлопок'";
+                else if (DBBuf.ClothesTypeBuf.Purpose == "Пиджак")
+                    command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
+                                          "Material = 'Шерсть'";
+                else if (DBBuf.ClothesTypeBuf.Purpose == "Жилет")
+                    command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
+                                          "Material = 'Шерсть' OR Material = 'Шелк'";
+                else if (DBBuf.ClothesTypeBuf.Purpose == "Брюки")
+                    command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
+                                          "Material = 'Лен' OR Material = 'Шелк' OR Material = 'Хлопок'";
+
+                command.Connection = connection;
+                SqlParameter AmountParameter = new SqlParameter("amount", DBBuf.FabricBuf.Amount);
+                command.Parameters.Add(AmountParameter);
+                SqlDataReader reader = command.ExecuteReader();
+
+                DBLists.FabricListSupport = new List<Fabric>();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        long id = reader.GetInt64(0);
+                        string Colour = reader.GetString(1);
+                        string Name = reader.GetString(2);
+                        string Material = reader.GetString(3);
+                        string Facture = reader.GetString(4);
+                        string Amount = reader.GetString(5);
+                        string ImagePath = reader.GetString(6);
+                        long Cost = reader.GetInt64(7);
+
+                        Fabric Element = new Fabric(id, Colour, Name, Material, Facture, Convert.ToInt32(Amount), ImagePath, Cost);
+                        string[] Fabric = { ImagePath, Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };
+                        DBLists.FabricListSupport.Add(Element);
+                        listViewRecommended.Items.Add(new ListViewItem(Fabric));
+                    }
                 }
             }
             catch (SqlException ex)

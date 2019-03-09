@@ -16,6 +16,7 @@ namespace SewingClothes.Class
         public static List<Customer> CustomerList { get; set; }
         public static List<Delivery> DeliveryList { get; set; }
         public static List<Fabric> FabricList { get; set; }
+        public static List<Fabric> FabricListSupport { get; set; }
         public static List<Order> OrderList { get; set; }
         public static List<Payment> PaymentList { get; set; }
 
