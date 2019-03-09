@@ -18,6 +18,7 @@ namespace SewingClothes.Forms
         public OrderRegistration()
         {
             InitializeComponent();
+            labelClothesCost.Text = DBBuf.ClothesBuf.Cost.ToString();
         }
 
         private void buttonMakeOrder_Click(object sender, EventArgs e)
@@ -25,7 +26,9 @@ namespace SewingClothes.Forms
             PaymentRequest();
             DeliveryRequest();
             ConstructClothes();
-            LoadOrder();
+            LoadAccessories();
+            ReduceAmount();
+            LoadOrder();            
             LoadData();
             
             Form2 frm = new Form2();
@@ -66,7 +69,15 @@ namespace SewingClothes.Forms
 
                 MessageBox.Show("Заказ успешно добавлен.", "", MessageBoxButtons.OK);
 
-            
+            DBBuf.OrderBuf = null;
+            DBBuf.AccessouriesBufList = null;
+            DBBuf.ClothesBuf = null;
+            DBBuf.ClothesTypeBuf = null;
+            DBBuf.ClothesPropertiesBuf = null;
+            DBBuf.CustomerBuf = null;
+            DBBuf.DeliveryBuf = null;
+            DBBuf.FabricBuf = null;
+            DBBuf.PaymentBuf = null;
 
         }
 
@@ -103,36 +114,7 @@ namespace SewingClothes.Forms
         /// </summary>
         public void DeliveryRequest()
         {
-            DBBuf.DeliveryBuf = new Delivery();
-            DBBuf.DeliveryBuf.Type = comboBoxDelivery.SelectedItem.ToString();
-
-            switch (DBBuf.DeliveryBuf.Type)
-            {
-                case "Почта":
-                    DBBuf.DeliveryBuf.DeliveryTime = "1 - 2 недели";
-                    DBBuf.DeliveryBuf.Cost = Convert.ToString(DBBuf.ClothesBuf.Cost/50);
-                    DBBuf.OrderBuf.TotalCost = Convert.ToInt64(DBBuf.DeliveryBuf.Cost) + Convert.ToInt32(DBBuf.ClothesBuf.Cost);
-                    break;
-
-                case "Курьер":
-                    DBBuf.DeliveryBuf.DeliveryTime = "до 5 дней";
-                    DBBuf.DeliveryBuf.Cost = Convert.ToString(DBBuf.ClothesBuf.Cost/25);
-                    DBBuf.OrderBuf.TotalCost = Convert.ToInt64(DBBuf.DeliveryBuf.Cost) + Convert.ToInt32(DBBuf.ClothesBuf.Cost);
-                    break;
-
-                case "Транспортная компания":
-                    DBBuf.DeliveryBuf.DeliveryTime = "до 5 дней";
-                    DBBuf.DeliveryBuf.Cost = Convert.ToString(DBBuf.ClothesBuf.Cost / 25);
-                    DBBuf.OrderBuf.TotalCost = Convert.ToInt64(DBBuf.DeliveryBuf.Cost) + Convert.ToInt32(DBBuf.ClothesBuf.Cost);
-                    break;
-
-                case "Самовывоз":
-                    DBBuf.DeliveryBuf.DeliveryTime = "Можно забрать в любое время";
-                    DBBuf.DeliveryBuf.Cost = Convert.ToString(0);
-                    DBBuf.OrderBuf.TotalCost = DBBuf.ClothesBuf.Cost;
-                    break;
-            }
-
+           
             SqlConnection connection = new SqlConnection(Connection.connectionString);
             try
             {
@@ -156,6 +138,9 @@ namespace SewingClothes.Forms
             }
         }
 
+        /// <summary>
+        /// Добавление записи в таблицу Clothes
+        /// </summary>
         public void ConstructClothes()
         {
             DBBuf.ClothesBuf.IdClothesProperties = DBBuf.ClothesPropertiesBuf.Id;
@@ -190,9 +175,12 @@ namespace SewingClothes.Forms
             }
         }
 
+        /// <summary>
+        /// Добавление записи в таблицу Order
+        /// </summary>
         public void LoadOrder()
         {
-            DBBuf.OrderBuf.Date = DateTime.Today.Date.ToString();
+            DBBuf.OrderBuf.Date = DateTime.Now.ToShortDateString();
             DBBuf.OrderBuf.IdClothes = DBBuf.ClothesBuf.Id;
             DBBuf.OrderBuf.IdDelivery = DBBuf.DeliveryBuf.Id;
             DBBuf.OrderBuf.IdPayment = DBBuf.PaymentBuf.Id;
@@ -219,7 +207,138 @@ namespace SewingClothes.Forms
 
                 DBBuf.OrderBuf.Id = Convert.ToInt64(command.ExecuteScalar());
 
+        }
 
+        /// <summary>
+        /// Добавление записей в таблицу Accessouries
+        /// </summary>
+        public void LoadAccessories()
+        {
+            SqlConnection connection = new SqlConnection(Connection.connectionString);
+            try
+            {
+                long value = 0;
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "INSERT INTO ClothesAccessories (IDClothes, IDAccessories) VALUES (@idClothes, @idAccessories)";
+                command.Connection = connection;
+                SqlParameter ClothesID = new SqlParameter("idClothes", DBBuf.ClothesBuf.Id);
+                command.Parameters.Add(ClothesID);
+
+                foreach (Accessouries Element in DBBuf.AccessouriesBufList)
+                {
+                    SqlParameter AccessoriesID = new SqlParameter("idAccessories", Element.Id);
+                    command.Parameters.Add(AccessoriesID);
+                    command.ExecuteNonQuery();
+                    command.Parameters.Remove(AccessoriesID);
+                }                            
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Уменьшение количества имеющихся аксессуаров и тканей
+        /// </summary>
+        public void ReduceAmount()
+        {
+            SqlConnection connection = new SqlConnection(Connection.connectionString);
+            try
+            {
+                long value = 0;
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "UPDATE Accessories SET Amount = Amount - @amount WHERE ID = @id";
+                command.Connection = connection;
+
+                foreach (Accessouries Element in DBBuf.AccessouriesBufList)
+                {
+                    SqlParameter AccessoriesAmount = new SqlParameter("amount", Element.Amount);
+                    command.Parameters.Add(AccessoriesAmount);
+                    SqlParameter AccessoriesID = new SqlParameter("id", Element.Id);
+                    command.Parameters.Add(AccessoriesID);
+                    command.ExecuteNonQuery();
+                    command.Parameters.Remove(AccessoriesID);
+                    command.Parameters.Remove(AccessoriesAmount);
+                }
+
+                command.CommandText = "UPDATE Fabric SET Amount = Amount - @amount WHERE ID = @id";
+                SqlParameter FabricAmount = new SqlParameter("amount", DBBuf.FabricBuf.Amount);
+                command.Parameters.Add(FabricAmount);
+                SqlParameter FabricID = new SqlParameter("id", DBBuf.FabricBuf.Id);
+                command.Parameters.Add(FabricID);
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void PriceLoad()
+        {            
+            DBBuf.DeliveryBuf = new Delivery();
+            DBBuf.DeliveryBuf.Type = comboBoxDelivery.SelectedItem.ToString();
+
+            switch (DBBuf.DeliveryBuf.Type)
+            {
+                case "Почта":
+                    DBBuf.DeliveryBuf.DeliveryTime = "1 - 2 недели";
+                    DBBuf.DeliveryBuf.Cost = Convert.ToString(DBBuf.ClothesBuf.Cost / 50);
+                    DBBuf.OrderBuf.TotalCost = Convert.ToInt64(DBBuf.DeliveryBuf.Cost) + Convert.ToInt32(DBBuf.ClothesBuf.Cost);
+                    labelDeliveryCost.Text = DBBuf.DeliveryBuf.Cost;
+                    labelTotalCost.Text = DBBuf.OrderBuf.TotalCost.ToString();
+                    labelDeliveryDate.Text = DBBuf.DeliveryBuf.DeliveryTime;
+                    break;
+
+                case "Курьер":
+                    DBBuf.DeliveryBuf.DeliveryTime = "до 5 дней";
+                    DBBuf.DeliveryBuf.Cost = Convert.ToString(DBBuf.ClothesBuf.Cost / 25);
+                    DBBuf.OrderBuf.TotalCost = Convert.ToInt64(DBBuf.DeliveryBuf.Cost) + Convert.ToInt32(DBBuf.ClothesBuf.Cost);
+                    labelDeliveryCost.Text = DBBuf.DeliveryBuf.Cost;
+                    labelTotalCost.Text = DBBuf.OrderBuf.TotalCost.ToString();
+                    labelDeliveryDate.Text = DBBuf.DeliveryBuf.DeliveryTime;
+                    break;
+
+                case "Транспортная компания":
+                    DBBuf.DeliveryBuf.DeliveryTime = "до 5 дней";
+                    DBBuf.DeliveryBuf.Cost = Convert.ToString(DBBuf.ClothesBuf.Cost / 25);
+                    DBBuf.OrderBuf.TotalCost = Convert.ToInt64(DBBuf.DeliveryBuf.Cost) + Convert.ToInt32(DBBuf.ClothesBuf.Cost);
+                    labelDeliveryCost.Text = DBBuf.DeliveryBuf.Cost;
+                    labelTotalCost.Text = DBBuf.OrderBuf.TotalCost.ToString();
+                    labelDeliveryDate.Text = DBBuf.DeliveryBuf.DeliveryTime;
+                    break;
+
+                case "Самовывоз":
+                    DBBuf.DeliveryBuf.DeliveryTime = "Можно забрать в любое время";
+                    DBBuf.DeliveryBuf.Cost = Convert.ToString(0);
+                    DBBuf.OrderBuf.TotalCost = DBBuf.ClothesBuf.Cost;
+                    labelDeliveryCost.Text = DBBuf.DeliveryBuf.Cost;
+                    labelTotalCost.Text = DBBuf.OrderBuf.TotalCost.ToString();
+                    labelDeliveryDate.Text = DBBuf.DeliveryBuf.DeliveryTime;
+                    break;
+            }
+        }
+
+        private void comboBoxDelivery_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PriceLoad();
+        }
+
+        private void buttonReturnMenu_Click(object sender, EventArgs e)
+        {
+            Form2 frm = new Form2();
+            frm.Show();
+            Close();
+        }
+
+        private void buttonReturnBascket_Click(object sender, EventArgs e)
+        {
+            Bascket frm = new Bascket();
+            frm.Show();
+            Close();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace SewingClothes
         {
             InitializeComponent();
             LoadAccessouries();
+            LoadRecommendedAccessories();
         }
 
 
@@ -25,14 +26,23 @@ namespace SewingClothes
         {
             DBBuf.AccessouriesBufList = new List<Accessouries>();
             int index;
-            if (listViewAccessories.SelectedItems.Count > 0)
+            if (listViewRecommended.SelectedItems.Count > 0)
+            {
+                for (int i = 0; i < listViewRecommended.SelectedItems.Count; i++)
+                {
+                    index = listViewRecommended.Items.IndexOf(listViewRecommended.SelectedItems[i]);
+                    DBBuf.AccessouriesBufList.Add(DBLists.AccessouriesListSupport[index]);
+                    DBBuf.AccessouriesBufList[i].Amount = 1;
+                }               
+            }
+            else if (listViewAccessories.SelectedItems.Count > 0)
             {
                 for (int i = 0; i < listViewAccessories.SelectedItems.Count; i++)
                 {
                     index = listViewAccessories.Items.IndexOf(listViewAccessories.SelectedItems[i]);
                     DBBuf.AccessouriesBufList.Add(DBLists.AccessouriesList[index]);
                     DBBuf.AccessouriesBufList[i].Amount = 1;
-                }               
+                }
             }
         }
 
@@ -44,7 +54,7 @@ namespace SewingClothes
                 connection.Open();
 
                 SqlCommand command = new SqlCommand();
-                command.CommandText = "SELECT * FROM Accessories";
+                command.CommandText = "SELECT * FROM Accessories WHERE Amount >= 1";
                 command.Connection = connection;
                 DBLists.AccessouriesList = new List<Accessouries>();
 
@@ -68,6 +78,60 @@ namespace SewingClothes
                         listViewAccessories.Items.Add(new ListViewItem(Accessories));
 
                         DBLists.AccessouriesList.Add(Element);
+                    }
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void LoadRecommendedAccessories()
+        {
+            SqlConnection connection = new SqlConnection(Connection.connectionString);
+            try
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                if (DBBuf.ClothesTypeBuf.Purpose == "Рубашка")
+                    command.CommandText = "SELECT * FROM Accessories WHERE Type != 'Пиджачный воротник' AND Position = 'Воротник' OR " +
+                                      "Position = 'Рукава' OR Position = 'Грудь' OR Type = 'Пуговицы'";
+                else if (DBBuf.ClothesTypeBuf.Purpose == "Пиджак")
+                    command.CommandText = "SELECT * FROM Accessories WHERE Type = 'Пиджачный воротник' OR " +
+                                          "Position = 'Рукава' OR Type LIKE '%карман%' OR Type = 'Пуговицы'";
+                else if (DBBuf.ClothesTypeBuf.Purpose == "Жилет")
+                    command.CommandText = "SELECT * FROM Accessories WHERE Position = 'Воротник' OR " +
+                                          "Type LIKE '%карман%' OR Type = 'Пуговицы' OR Type = 'Крючки'";
+                else if (DBBuf.ClothesTypeBuf.Purpose == "Брюки")
+                    command.CommandText = "SELECT * FROM Accessories WHERE Position = 'Левый бок' OR Position = 'Правый бок' OR " +
+                                          "Type = 'Пуговицы' OR Type = 'Молния'";
+
+                command.Connection = connection;
+                DBLists.AccessouriesListSupport = new List<Accessouries>();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        long Id = reader.GetInt64(0);
+                        string Type = reader.GetString(1);
+                        string Position = reader.GetString(2);
+                        long Amount = reader.GetInt64(3);
+                        long CostPerUnit = reader.GetInt64(4);
+                        string ImagePath = reader.GetString(5);
+
+                        Accessouries Element = new Accessouries(Id, Type, Position, Amount, CostPerUnit, ImagePath);
+                        string[] Accessories =
+                            {"",Type, Convert.ToString(Position),Convert.ToString(Amount), Convert.ToString(CostPerUnit)};
+
+                        listViewRecommended.Items.Add(new ListViewItem(Accessories));
+
+                        DBLists.AccessouriesListSupport.Add(Element);
                     }
 
                 }

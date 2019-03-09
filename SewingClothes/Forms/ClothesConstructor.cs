@@ -29,16 +29,31 @@ namespace SewingClothes
 
         private void buttonFabricChoice_Click(object sender, EventArgs e)
         {
-            FabricsChoice FChoice = new FabricsChoice();
-            FChoice.Show();
-            Close();
+            try
+            {
+                FabricsChoice FChoice = new FabricsChoice();
+                FChoice.Show();
+                Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("В начале выберите характеристики одежды.","",MessageBoxButtons.OK);
+            }
         }
 
         private void buttonAccessouriesChoice_Click(object sender, EventArgs e)
         {
-            AccesouriesChoice AChoice = new AccesouriesChoice();
-            AChoice.Show();
-            Close();
+            try
+            {
+                AccesouriesChoice AChoice = new AccesouriesChoice();
+                AChoice.Show();
+                Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("В начале выберите характеристики одежды.", "", MessageBoxButtons.OK);
+            }
+
         }
 
         private void buttonBasket_Click(object sender, EventArgs e)

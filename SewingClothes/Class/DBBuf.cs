@@ -19,7 +19,7 @@ namespace SewingClothes.Class
         public static Order OrderBuf { get; set; }
         public static Payment PaymentBuf { get; set; }
 
-        public static bool Choosed { get; set; }
+        public static long AmountFabric { get; set; }
 
     }
 }

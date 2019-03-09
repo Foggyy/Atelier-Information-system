@@ -47,9 +47,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.buttonMakeOrder = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.labelClothesCost = new System.Windows.Forms.Label();
+            this.labelDeliveryCost = new System.Windows.Forms.Label();
+            this.labelTotalCost = new System.Windows.Forms.Label();
+            this.buttonReturnMenu = new System.Windows.Forms.Button();
+            this.buttonReturnBascket = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelDeliveryDate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -165,8 +169,9 @@
             "Самовывоз"});
             this.comboBoxDelivery.Location = new System.Drawing.Point(155, 286);
             this.comboBoxDelivery.Name = "comboBoxDelivery";
-            this.comboBoxDelivery.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxDelivery.Size = new System.Drawing.Size(213, 24);
             this.comboBoxDelivery.TabIndex = 17;
+            this.comboBoxDelivery.SelectedIndexChanged += new System.EventHandler(this.comboBoxDelivery_SelectedIndexChanged);
             // 
             // comboBoxPayment
             // 
@@ -179,7 +184,7 @@
             "Банковский перевод"});
             this.comboBoxPayment.Location = new System.Drawing.Point(155, 329);
             this.comboBoxPayment.Name = "comboBoxPayment";
-            this.comboBoxPayment.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxPayment.Size = new System.Drawing.Size(213, 24);
             this.comboBoxPayment.TabIndex = 18;
             // 
             // label9
@@ -221,7 +226,7 @@
             // 
             // buttonMakeOrder
             // 
-            this.buttonMakeOrder.Location = new System.Drawing.Point(394, 248);
+            this.buttonMakeOrder.Location = new System.Drawing.Point(541, 285);
             this.buttonMakeOrder.Name = "buttonMakeOrder";
             this.buttonMakeOrder.Size = new System.Drawing.Size(149, 105);
             this.buttonMakeOrder.TabIndex = 24;
@@ -229,41 +234,83 @@
             this.buttonMakeOrder.UseVisualStyleBackColor = true;
             this.buttonMakeOrder.Click += new System.EventHandler(this.buttonMakeOrder_Click);
             // 
-            // label14
+            // labelClothesCost
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(512, 65);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(13, 17);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "-";
+            this.labelClothesCost.AutoSize = true;
+            this.labelClothesCost.Location = new System.Drawing.Point(512, 65);
+            this.labelClothesCost.Name = "labelClothesCost";
+            this.labelClothesCost.Size = new System.Drawing.Size(13, 17);
+            this.labelClothesCost.TabIndex = 25;
+            this.labelClothesCost.Text = "-";
             // 
-            // label15
+            // labelDeliveryCost
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(512, 101);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(13, 17);
-            this.label15.TabIndex = 26;
-            this.label15.Text = "-";
+            this.labelDeliveryCost.AutoSize = true;
+            this.labelDeliveryCost.Location = new System.Drawing.Point(512, 101);
+            this.labelDeliveryCost.Name = "labelDeliveryCost";
+            this.labelDeliveryCost.Size = new System.Drawing.Size(13, 17);
+            this.labelDeliveryCost.TabIndex = 26;
+            this.labelDeliveryCost.Text = "-";
             // 
-            // label17
+            // labelTotalCost
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(512, 137);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(13, 17);
-            this.label17.TabIndex = 28;
-            this.label17.Text = "-";
+            this.labelTotalCost.AutoSize = true;
+            this.labelTotalCost.Location = new System.Drawing.Point(512, 137);
+            this.labelTotalCost.Name = "labelTotalCost";
+            this.labelTotalCost.Size = new System.Drawing.Size(13, 17);
+            this.labelTotalCost.TabIndex = 28;
+            this.labelTotalCost.Text = "-";
+            // 
+            // buttonReturnMenu
+            // 
+            this.buttonReturnMenu.Location = new System.Drawing.Point(12, 378);
+            this.buttonReturnMenu.Name = "buttonReturnMenu";
+            this.buttonReturnMenu.Size = new System.Drawing.Size(113, 62);
+            this.buttonReturnMenu.TabIndex = 29;
+            this.buttonReturnMenu.Text = "Вернуться в главное меню";
+            this.buttonReturnMenu.UseVisualStyleBackColor = true;
+            this.buttonReturnMenu.Click += new System.EventHandler(this.buttonReturnMenu_Click);
+            // 
+            // buttonReturnBascket
+            // 
+            this.buttonReturnBascket.Location = new System.Drawing.Point(142, 378);
+            this.buttonReturnBascket.Name = "buttonReturnBascket";
+            this.buttonReturnBascket.Size = new System.Drawing.Size(113, 62);
+            this.buttonReturnBascket.TabIndex = 30;
+            this.buttonReturnBascket.Text = "Вернуться в корзину";
+            this.buttonReturnBascket.UseVisualStyleBackColor = true;
+            this.buttonReturnBascket.Click += new System.EventHandler(this.buttonReturnBascket_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(342, 214);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 17);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Срок доставки:";
+            // 
+            // labelDeliveryDate
+            // 
+            this.labelDeliveryDate.AutoSize = true;
+            this.labelDeliveryDate.Location = new System.Drawing.Point(512, 214);
+            this.labelDeliveryDate.Name = "labelDeliveryDate";
+            this.labelDeliveryDate.Size = new System.Drawing.Size(13, 17);
+            this.labelDeliveryDate.TabIndex = 32;
+            this.labelDeliveryDate.Text = "-";
             // 
             // OrderRegistration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 452);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.labelDeliveryDate);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.buttonReturnBascket);
+            this.Controls.Add(this.buttonReturnMenu);
+            this.Controls.Add(this.labelTotalCost);
+            this.Controls.Add(this.labelDeliveryCost);
+            this.Controls.Add(this.labelClothesCost);
             this.Controls.Add(this.buttonMakeOrder);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -311,8 +358,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button buttonMakeOrder;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label labelClothesCost;
+        private System.Windows.Forms.Label labelDeliveryCost;
+        private System.Windows.Forms.Label labelTotalCost;
+        private System.Windows.Forms.Button buttonReturnMenu;
+        private System.Windows.Forms.Button buttonReturnBascket;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelDeliveryDate;
     }
 }

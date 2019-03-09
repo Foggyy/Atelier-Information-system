@@ -14,6 +14,8 @@ namespace SewingClothes
 {
     public partial class Bascket : Form
     {
+        private int Amount = DBBuf.FabricBuf.Amount;
+
         public Bascket()
         {
             InitializeComponent();
@@ -63,6 +65,7 @@ namespace SewingClothes
 
         private void buttonMakeOffer_Click(object sender, EventArgs e)
         {
+            DBBuf.FabricBuf.Amount = Amount;
             OrderRegistration frm = new OrderRegistration();
             frm.Show();
             Close();
@@ -70,24 +73,35 @@ namespace SewingClothes
 
         private void textBoxClothesAmount_TextChanged(object sender, EventArgs e)
         {
-            long cost = DBBuf.FabricBuf.CostPerMeter * DBBuf.FabricBuf.Amount * Convert.ToInt64(textBoxClothesAmount.Text);
-            labelFabricCost.Text = Convert.ToString(cost);
-
-            long sum = 0;
-            foreach (Accessouries Element in DBBuf.AccessouriesBufList)
+            if (DBBuf.FabricBuf.Amount * Convert.ToInt64(textBoxClothesAmount.Text) <= DBBuf.AmountFabric)
             {
-                sum += Element.CostPerUnit;
-                Element.Amount = Element.Amount * Convert.ToInt32(textBoxClothesAmount.Text);
+                long cost = DBBuf.FabricBuf.CostPerMeter * DBBuf.FabricBuf.Amount * Convert.ToInt64(textBoxClothesAmount.Text);
+                labelFabricCost.Text = Convert.ToString(cost);
+
+                long sum = 0;
+                foreach (Accessouries Element in DBBuf.AccessouriesBufList)
+                {
+                    sum += Element.CostPerUnit;
+                    Element.Amount = Element.Amount * Convert.ToInt32(textBoxClothesAmount.Text);
+                }
+                sum = sum * Convert.ToInt64(textBoxClothesAmount.Text);
+                labelAccessouriesCost.Text = Convert.ToString(sum);
+                sum += cost;
+                labelFinalCost.Text = Convert.ToString(sum);
+
+                DBBuf.ClothesBuf.Amount = Convert.ToInt32(textBoxClothesAmount.Text);
+                DBBuf.ClothesBuf.Cost = Convert.ToInt32(sum);
+
+                Amount = Convert.ToInt32(textBoxClothesAmount.Text) * DBBuf.FabricBuf.Amount;
             }
-            sum = sum * Convert.ToInt64(textBoxClothesAmount.Text);
-            labelAccessouriesCost.Text = Convert.ToString(sum);
-            sum += cost;
-            labelFinalCost.Text = Convert.ToString(sum);
-
-            DBBuf.ClothesBuf.Amount = Convert.ToInt32(textBoxClothesAmount.Text);
-            DBBuf.ClothesBuf.Cost = Convert.ToInt32(sum);
-
-            DBBuf.FabricBuf.Amount = Convert.ToInt32(textBoxClothesAmount.Text) * DBBuf.FabricBuf.Amount;;
+            else
+            {
+                MessageBox.Show("Количество одежды превышает количество имеющейся ткани, " +
+                                "уменьшите количество одежды или выберите другую ткань.", "", MessageBoxButtons.OK);
+                Amount = DBBuf.FabricBuf.Amount;
+                textBoxClothesAmount.Text = "1";
+            }
+            
         }
     }
 }

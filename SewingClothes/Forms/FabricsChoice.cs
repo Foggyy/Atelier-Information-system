@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using SewingClothes.Class;
@@ -17,7 +11,10 @@ namespace SewingClothes
         public FabricsChoice()
         {
             InitializeComponent();
-            LoadAllFabrics();            
+
+            DBBuf.FabricBuf = new Fabric();
+            AmountFabricCalculate();
+            LoadAllFabrics();           
         }
 
         private void buttonReturnMenu_Click(object sender, EventArgs e)
@@ -29,24 +26,34 @@ namespace SewingClothes
 
         private void buttonAddFabric_Click(object sender, EventArgs e)
         {
-            SaveFabric();
-            Form2 Menu = new Form2();           
-            Menu.Show();
-            Close();
+            bool ok;
+            ok = SaveFabric();
+            if (ok)
+            {
+                Form2 Menu = new Form2();
+                Menu.Show();
+                Close();
+            }
         }
 
         /// <summary>
         /// Сохранение выбранной ткани
         /// </summary>
-        public void SaveFabric()
+        public bool SaveFabric()
         {
-            DBBuf.FabricBuf = new Fabric();
             int index ;
-            if (listViewAllFabrics.SelectedItems.Count > 0)
+            if (listViewAllFabrics.SelectedItems.Count == 1)
             {
                 index = listViewAllFabrics.Items.IndexOf(listViewAllFabrics.SelectedItems[0]);
                 DBBuf.FabricBuf = DBLists.FabricList[index];
+                DBBuf.AmountFabric = DBLists.FabricList[index].Amount;
                 AmountFabricCalculate();
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Выберите одну ткань.", "", MessageBoxButtons.OK);
+                return false;
             }
         }
 
@@ -61,8 +68,10 @@ namespace SewingClothes
                 connection.Open();
 
                 SqlCommand command = new SqlCommand();
-                command.CommandText = "SELECT * FROM Fabric";
+                command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount";
                 command.Connection = connection;
+                SqlParameter AmountParameter = new SqlParameter("amount", DBBuf.FabricBuf.Amount);
+                command.Parameters.Add(AmountParameter);
                 SqlDataReader reader = command.ExecuteReader();
 
                 DBLists.FabricList = new List<Fabric>();
@@ -95,7 +104,7 @@ namespace SewingClothes
         }
 
         public void AmountFabricCalculate()
-        {
+        {            
             if (DBBuf.ClothesTypeBuf.Purpose == "Пиджак" || DBBuf.ClothesTypeBuf.Purpose == "Рубашка")
             {
                 switch (DBBuf.ClothesPropertiesBuf.Size)
