@@ -217,7 +217,6 @@ namespace SewingClothes.Forms
             SqlConnection connection = new SqlConnection(Connection.connectionString);
             try
             {
-                long value = 0;
                 connection.Open();
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "INSERT INTO ClothesAccessories (IDClothes, IDAccessories) VALUES (@idClothes, @idAccessories)";

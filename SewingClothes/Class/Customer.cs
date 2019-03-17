@@ -8,7 +8,7 @@ namespace SewingClothes.Class
 {
     public class Customer
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string FIO { get; set; }
         public string Address { get; set; }
         public long PhoneNumber { get; set; }
@@ -25,7 +25,7 @@ namespace SewingClothes.Class
             IdOrder = 0;
         }
 
-        public Customer(int id, string fio, string address, long phoneNumber, string email, long idOrder)
+        public Customer(long id, string fio, string address, long phoneNumber, string email, long idOrder)
         {
             Id = id;
             FIO = fio;
