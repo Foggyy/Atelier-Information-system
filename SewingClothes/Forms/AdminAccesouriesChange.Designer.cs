@@ -1,6 +1,6 @@
 ﻿namespace SewingClothes
 {
-    partial class Изменить_список_аксессуаров
+    partial class AdminAccesouriesChange
     {
         /// <summary>
         /// Required designer variable.
@@ -45,7 +45,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonReturnAdmin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label6
@@ -188,21 +188,22 @@
             this.button1.Text = "Удалить выбранный аксессуар";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // buttonReturnAdmin
             // 
-            this.button2.Location = new System.Drawing.Point(12, 406);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 48);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "Вернуться назад";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonReturnAdmin.Location = new System.Drawing.Point(12, 406);
+            this.buttonReturnAdmin.Name = "buttonReturnAdmin";
+            this.buttonReturnAdmin.Size = new System.Drawing.Size(106, 48);
+            this.buttonReturnAdmin.TabIndex = 31;
+            this.buttonReturnAdmin.Text = "Вернуться назад";
+            this.buttonReturnAdmin.UseVisualStyleBackColor = true;
+            this.buttonReturnAdmin.Click += new System.EventHandler(this.buttonReturnAdmin_Click);
             // 
-            // Изменить_список_аксессуаров
+            // AdminAccesouriesChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(928, 465);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonReturnAdmin);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label5);
@@ -216,8 +217,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label6);
-            this.Name = "Изменить_список_аксессуаров";
+            this.Name = "AdminAccesouriesChange";
             this.Text = "Изменение списка аксессуаров";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminAccesouriesChange_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,6 +244,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonReturnAdmin;
     }
 }

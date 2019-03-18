@@ -24,7 +24,7 @@ namespace SewingClothes
         {
             Form3 CChoice = new Form3();           
             CChoice.Show();
-            Close();
+            Hide();
         }
 
         private void buttonFabricChoice_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace SewingClothes
             {
                 FabricsChoice FChoice = new FabricsChoice();
                 FChoice.Show();
-                Close();
+                Hide();
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace SewingClothes
             {
                 AccesouriesChoice AChoice = new AccesouriesChoice();
                 AChoice.Show();
-                Close();
+                Hide();
             }
             catch (Exception)
             {
@@ -62,7 +62,7 @@ namespace SewingClothes
             {
                 Bascket frm = new Bascket();
                 frm.Show();
-                Close();
+                Hide();
             }
             catch (Exception)
             {
@@ -74,7 +74,7 @@ namespace SewingClothes
         {
             Form1 frm = new Form1();
             frm.Show();
-            Close();
+            Hide();
         }
 
         private void LoadChanges()
@@ -106,6 +106,12 @@ namespace SewingClothes
 
                 richTextBoxAccessouries.Visible = true;
             }
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                Application.Exit();
         }
     }
 }

@@ -265,6 +265,7 @@
             this.Controls.Add(this.label2);
             this.Name = "OrderList";
             this.Text = "Список заказов";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderList_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

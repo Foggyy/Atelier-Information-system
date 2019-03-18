@@ -22,7 +22,7 @@ namespace SewingClothes
         {
             Form2 Menu = new Form2();
             Menu.Show();
-            Close();
+            Hide();
         }
 
         private void buttonAddFabric_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace SewingClothes
             {
                 Form2 Menu = new Form2();
                 Menu.Show();
-                Close();
+                Hide();
             }
         }
 
@@ -237,6 +237,12 @@ namespace SewingClothes
             {
                 DBBuf.FabricBuf.Amount = 2;
             }
+        }
+
+        private void FabricsChoice_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                Application.Exit();
         }
     }
 }

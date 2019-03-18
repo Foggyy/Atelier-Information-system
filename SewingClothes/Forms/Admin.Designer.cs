@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonChangeFabric = new System.Windows.Forms.Button();
+            this.buttonChangeAccessories = new System.Windows.Forms.Button();
             this.buttonOrdersList = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonChangeFabric
             // 
-            this.button1.Location = new System.Drawing.Point(188, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(164, 81);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Изменить список тканей";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonChangeFabric.Location = new System.Drawing.Point(188, 25);
+            this.buttonChangeFabric.Name = "buttonChangeFabric";
+            this.buttonChangeFabric.Size = new System.Drawing.Size(164, 81);
+            this.buttonChangeFabric.TabIndex = 0;
+            this.buttonChangeFabric.Text = "Изменить список тканей";
+            this.buttonChangeFabric.UseVisualStyleBackColor = true;
+            this.buttonChangeFabric.Click += new System.EventHandler(this.buttonChangeFabric_Click);
             // 
-            // button2
+            // buttonChangeAccessories
             // 
-            this.button2.Location = new System.Drawing.Point(188, 124);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(164, 81);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Изменить список аксессуаров";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonChangeAccessories.Location = new System.Drawing.Point(188, 124);
+            this.buttonChangeAccessories.Name = "buttonChangeAccessories";
+            this.buttonChangeAccessories.Size = new System.Drawing.Size(164, 81);
+            this.buttonChangeAccessories.TabIndex = 1;
+            this.buttonChangeAccessories.Text = "Изменить список аксессуаров";
+            this.buttonChangeAccessories.UseVisualStyleBackColor = true;
+            this.buttonChangeAccessories.Click += new System.EventHandler(this.buttonChangeAccessories_Click);
             // 
             // buttonOrdersList
             // 
@@ -58,7 +60,7 @@
             this.buttonOrdersList.Name = "buttonOrdersList";
             this.buttonOrdersList.Size = new System.Drawing.Size(164, 81);
             this.buttonOrdersList.TabIndex = 2;
-            this.buttonOrdersList.Text = "Просмотр оформленных заказов";
+            this.buttonOrdersList.Text = "Оформленные заказы";
             this.buttonOrdersList.UseVisualStyleBackColor = true;
             this.buttonOrdersList.Click += new System.EventHandler(this.buttonOrdersList_Click);
             // 
@@ -78,8 +80,8 @@
             this.ClientSize = new System.Drawing.Size(570, 443);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.buttonOrdersList);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonChangeAccessories);
+            this.Controls.Add(this.buttonChangeFabric);
             this.Name = "Admin";
             this.Text = "Admin";
             this.ResumeLayout(false);
@@ -88,8 +90,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonChangeFabric;
+        private System.Windows.Forms.Button buttonChangeAccessories;
         private System.Windows.Forms.Button buttonOrdersList;
         private System.Windows.Forms.Button button4;
     }

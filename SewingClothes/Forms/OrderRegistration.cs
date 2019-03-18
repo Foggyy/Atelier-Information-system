@@ -330,14 +330,20 @@ namespace SewingClothes.Forms
         {
             Form2 frm = new Form2();
             frm.Show();
-            Close();
+            Hide();
         }
 
         private void buttonReturnBascket_Click(object sender, EventArgs e)
         {
             Bascket frm = new Bascket();
             frm.Show();
-            Close();
+            Hide();
+        }
+
+        private void OrderRegistration_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                Application.Exit();
         }
     }
 }

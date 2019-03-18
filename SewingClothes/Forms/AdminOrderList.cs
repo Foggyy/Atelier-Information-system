@@ -274,7 +274,7 @@ namespace SewingClothes
         {
             Admin frm = new Admin();
             frm.Show();
-            Close();
+            Hide();
         }
 
         private void buttonCancelOrder_Click(object sender, EventArgs e)
@@ -282,5 +282,10 @@ namespace SewingClothes
             DeleteOrder();
         }
 
+        private void OrderList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                Application.Exit();
+        }
     }
 }

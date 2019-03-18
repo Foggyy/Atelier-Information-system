@@ -259,6 +259,7 @@
             this.columnHeaderType,
             this.columnHeaderPosition,
             this.columnHeaderCost});
+            this.listViewAccessories.FullRowSelect = true;
             this.listViewAccessories.Location = new System.Drawing.Point(12, 260);
             this.listViewAccessories.Name = "listViewAccessories";
             this.listViewAccessories.Size = new System.Drawing.Size(635, 203);
@@ -335,6 +336,7 @@
             this.Controls.Add(this.label2);
             this.Name = "Bascket";
             this.Text = "Корзина";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Bascket_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -227,6 +227,7 @@
             this.Controls.Add(this.buttonReturnMenu);
             this.Name = "Form3";
             this.Text = "Выбор характеристик одежды";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

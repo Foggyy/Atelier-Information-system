@@ -332,6 +332,7 @@
             this.Controls.Add(this.label2);
             this.Name = "OrderRegistration";
             this.Text = "OrderRegistration";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderRegistration_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

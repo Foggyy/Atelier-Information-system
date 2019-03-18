@@ -70,7 +70,9 @@
             this.columnHeaderTexture,
             this.columnHeaderAmount,
             this.columnHeaderCost});
+            this.listViewAllFabrics.FullRowSelect = true;
             this.listViewAllFabrics.Location = new System.Drawing.Point(12, 304);
+            this.listViewAllFabrics.MultiSelect = false;
             this.listViewAllFabrics.Name = "listViewAllFabrics";
             this.listViewAllFabrics.Size = new System.Drawing.Size(860, 187);
             this.listViewAllFabrics.TabIndex = 1;
@@ -152,7 +154,9 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
+            this.listViewRecommended.FullRowSelect = true;
             this.listViewRecommended.Location = new System.Drawing.Point(17, 52);
+            this.listViewRecommended.MultiSelect = false;
             this.listViewRecommended.Name = "listViewRecommended";
             this.listViewRecommended.Size = new System.Drawing.Size(855, 176);
             this.listViewRecommended.TabIndex = 5;
@@ -207,6 +211,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FabricsChoice";
             this.Text = "Выбор ткани";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FabricsChoice_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

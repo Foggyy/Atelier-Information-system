@@ -26,7 +26,7 @@ namespace SewingClothes
         {
             Form2 Menu = new Form2();
             Menu.Show();
-            Close();
+            Hide();
         }
 
         public void LoadData()
@@ -68,7 +68,7 @@ namespace SewingClothes
             DBBuf.FabricBuf.Amount = Amount;
             OrderRegistration frm = new OrderRegistration();
             frm.Show();
-            Close();
+            Hide();
         }
 
         private void textBoxClothesAmount_TextChanged(object sender, EventArgs e)
@@ -102,6 +102,12 @@ namespace SewingClothes
                 textBoxClothesAmount.Text = "1";
             }
             
+        }
+
+        private void Bascket_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                Application.Exit();
         }
     }
 }

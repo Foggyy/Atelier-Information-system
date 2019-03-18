@@ -74,6 +74,7 @@
             this.columnHeaderPosition,
             this.columnHeaderAmount,
             this.columnHeaderCost});
+            this.listViewAccessories.FullRowSelect = true;
             this.listViewAccessories.Location = new System.Drawing.Point(17, 297);
             this.listViewAccessories.Name = "listViewAccessories";
             this.listViewAccessories.Size = new System.Drawing.Size(740, 201);
@@ -134,6 +135,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
+            this.listViewRecommended.FullRowSelect = true;
             this.listViewRecommended.Location = new System.Drawing.Point(17, 41);
             this.listViewRecommended.Name = "listViewRecommended";
             this.listViewRecommended.Size = new System.Drawing.Size(740, 201);
@@ -179,6 +181,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AccesouriesChoice";
             this.Text = "Выбор аксессуаров";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccesouriesChoice_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

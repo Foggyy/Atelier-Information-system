@@ -11,7 +11,6 @@ G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debu
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Form1.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.OrderList.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Properties.Resources.resources
-G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Изменить_список_аксессуаров.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.RequestConstructor.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.csproj.GenerateResource.cache
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.csproj.CoreCompileInputs.cache
@@ -19,3 +18,4 @@ G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debu
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.pdb
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Bascket.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Forms.OrderRegistration.resources
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.AdminAccesouriesChange.resources

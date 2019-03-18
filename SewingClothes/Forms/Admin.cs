@@ -23,5 +23,17 @@ namespace SewingClothes
             amdOrdList.Show();
             Hide();
         }
+
+        private void buttonChangeFabric_Click(object sender, EventArgs e)
+        {
+            AdminFabricChange frm = new AdminFabricChange();
+            frm.Show();
+            Close();
+        }
+
+        private void buttonChangeAccessories_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

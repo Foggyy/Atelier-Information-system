@@ -236,6 +236,7 @@
             this.Controls.Add(this.buttonBasket);
             this.Name = "Form2";
             this.Text = "Конструктор одежды";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
