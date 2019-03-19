@@ -50,6 +50,10 @@
             this.labelGender = new System.Windows.Forms.Label();
             this.labelClothesTypeDynamic = new System.Windows.Forms.Label();
             this.labelGenderDynamic = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelFabricName = new System.Windows.Forms.Label();
+            this.labelFabricColour = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -70,7 +74,9 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listViewOrders.FullRowSelect = true;
             this.listViewOrders.Location = new System.Drawing.Point(17, 89);
+            this.listViewOrders.MultiSelect = false;
             this.listViewOrders.Name = "listViewOrders";
             this.listViewOrders.Size = new System.Drawing.Size(789, 212);
             this.listViewOrders.TabIndex = 12;
@@ -241,11 +247,52 @@
             this.labelGenderDynamic.TabIndex = 27;
             this.labelGenderDynamic.Text = "-";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(852, 273);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 17);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Ткань:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(852, 304);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 17);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Цвет ткани:";
+            // 
+            // labelFabricName
+            // 
+            this.labelFabricName.AutoSize = true;
+            this.labelFabricName.Location = new System.Drawing.Point(1000, 273);
+            this.labelFabricName.Name = "labelFabricName";
+            this.labelFabricName.Size = new System.Drawing.Size(13, 17);
+            this.labelFabricName.TabIndex = 30;
+            this.labelFabricName.Text = "-";
+            // 
+            // labelFabricColour
+            // 
+            this.labelFabricColour.AutoSize = true;
+            this.labelFabricColour.Location = new System.Drawing.Point(1000, 304);
+            this.labelFabricColour.Name = "labelFabricColour";
+            this.labelFabricColour.Size = new System.Drawing.Size(13, 17);
+            this.labelFabricColour.TabIndex = 31;
+            this.labelFabricColour.Text = "-";
+            // 
             // OrderList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1378, 417);
+            this.Controls.Add(this.labelFabricColour);
+            this.Controls.Add(this.labelFabricName);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelGenderDynamic);
             this.Controls.Add(this.labelClothesTypeDynamic);
             this.Controls.Add(this.labelGender);
@@ -264,6 +311,7 @@
             this.Controls.Add(this.listViewOrders);
             this.Controls.Add(this.label2);
             this.Name = "OrderList";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Список заказов";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderList_FormClosing);
             this.ResumeLayout(false);
@@ -295,5 +343,9 @@
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Label labelClothesTypeDynamic;
         private System.Windows.Forms.Label labelGenderDynamic;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelFabricName;
+        private System.Windows.Forms.Label labelFabricColour;
     }
 }

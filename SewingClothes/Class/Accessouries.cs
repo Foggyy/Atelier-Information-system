@@ -22,6 +22,7 @@ namespace SewingClothes.Class
             Position = "";
             Amount = 0;
             CostPerUnit = 0;
+            ImagePath = "";
         }
 
         public Accessouries(long id, string type, string position, long amount, long costPerUnit, string imagePath)

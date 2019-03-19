@@ -23,10 +23,20 @@ namespace SewingClothes
         public void LoadFabric()
         {
             DBLists.FabricList = new List<Fabric>();
+            DBBuf.FabricBuf = new Fabric();
             SqlConnection connection = new SqlConnection(Connection.connectionString);
             try
             {
                 connection.Open();
+
+                ImageList imageList = new ImageList();
+                imageList.ImageSize = new Size(60, 50);
+                Bitmap emptyImage = new Bitmap(60, 50);
+                using (Graphics gr = Graphics.FromImage(emptyImage))
+                {
+                    gr.Clear(Color.White);
+                }
+                listViewAllFabrics.SmallImageList = imageList;
 
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "SELECT * FROM Fabric";
@@ -34,7 +44,7 @@ namespace SewingClothes
                 SqlDataReader reader = command.ExecuteReader();
 
                 DBLists.FabricList = new List<Fabric>();
-
+                int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -48,10 +58,22 @@ namespace SewingClothes
                         string ImagePath = reader.GetString(6);
                         long Cost = reader.GetInt64(7);
 
+                        if (ImagePath != "" && ImagePath != "-")
+                            imageList.Images.Add(new Bitmap(ImagePath));
+                        else
+                        {
+                            imageList.Images.Add(emptyImage);
+                        }
+
                         Fabric Element = new Fabric(id, Colour, Name, Material, Facture, Convert.ToInt32(Amount), ImagePath, Cost);
-                        string[] Fabric = { ImagePath, Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };
+                        string[] Fabric = {"", Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };
                         DBLists.FabricList.Add(Element);
-                        listViewAllFabrics.Items.Add(new ListViewItem(Fabric));
+
+                        ListViewItem lvi = new ListViewItem(Fabric);
+                        lvi.ImageIndex = i;
+                        DBLists.FabricList.Add(Element);
+                        listViewAllFabrics.Items.Add(lvi);
+                        i++;
                     }
                 }
             }
@@ -69,37 +91,50 @@ namespace SewingClothes
                 SqlCommand command = new SqlCommand();
                 connection.Open();
                 command.Connection = connection;
-                
+
+
                 if (listViewAllFabrics.SelectedIndices.Count == 1)
                 {
-                    DBBuf.FabricBuf = new Fabric();
                     long index = listViewAllFabrics.Items.IndexOf(listViewAllFabrics.SelectedItems[0]);
                     index = DBLists.FabricList[Convert.ToInt32(index)].Id;
                     DBBuf.FabricBuf.Id = index;
+                    Fabric SupportFabric = new Fabric();
                     SqlParameter commandParameter;
-                    
-                    command.CommandText = "UPDATE Fabric SET Name=@name, Colour=@colour, Material=@material, Texture=@texture, " +
-                                          "Cost_per_meter=@cost, Amount=@amount, ImagePath=@image WHERE ID=@id";
+
+                    command.CommandText =
+                        "UPDATE Fabric SET Name=@name, Colour=@colour, Material=@material, Texture=@texture, " +
+                        "Cost_per_meter=@cost, Amount=@amount, ImagePath=@image WHERE ID=@id";
+
+
+                    foreach (Fabric Element in DBLists.FabricList)
+                    {
+                        if (Element.Id == index)
+                        {
+                            SupportFabric = new Fabric(Element.Id,Element.Colour,Element.Name,Element.Material,Element.Facture,Element.Amount,Element.Image,Element.CostPerMeter);
+                        }
+                    }
 
                     if (textBoxFabricName.Text != "")
                     {
-                        commandParameter = new SqlParameter("name",textBoxFabricName.Text);
+                        commandParameter = new SqlParameter("name", textBoxFabricName.Text);
                         command.Parameters.Add(commandParameter);
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("name", DBLists.FabricList[Convert.ToInt32(index)].Name);
+
+                        commandParameter = new SqlParameter("name", SupportFabric.Name);
                         command.Parameters.Add(commandParameter);
                     }
 
                     if (textBoxColour.Text != "")
                     {
-                        commandParameter = new SqlParameter("colour",textBoxColour.Text);
+                        commandParameter = new SqlParameter("colour", textBoxColour.Text);
                         command.Parameters.Add(commandParameter);
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("colour", DBLists.FabricList[Convert.ToInt32(index)].Colour);
+                        commandParameter =
+                            new SqlParameter("colour", SupportFabric.Colour);
                         command.Parameters.Add(commandParameter);
                     }
 
@@ -110,7 +145,7 @@ namespace SewingClothes
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("material", DBLists.FabricList[Convert.ToInt32(index)].Material);
+                        commandParameter = new SqlParameter("material", SupportFabric.Material);
                         command.Parameters.Add(commandParameter);
                     }
 
@@ -121,7 +156,7 @@ namespace SewingClothes
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("texture", DBLists.FabricList[Convert.ToInt32(index)].Facture);
+                        commandParameter = new SqlParameter("texture", SupportFabric.Facture);
                         command.Parameters.Add(commandParameter);
                     }
 
@@ -133,7 +168,7 @@ namespace SewingClothes
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("cost", DBLists.FabricList[Convert.ToInt32(index)].CostPerMeter);
+                        commandParameter = new SqlParameter("cost", SupportFabric.CostPerMeter);
                         command.Parameters.Add(commandParameter);
                     }
 
@@ -145,7 +180,7 @@ namespace SewingClothes
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("amount", DBLists.FabricList[Convert.ToInt32(index)].Amount);
+                        commandParameter = new SqlParameter("amount", SupportFabric.Amount);
                         command.Parameters.Add(commandParameter);
                     }
 
@@ -156,17 +191,19 @@ namespace SewingClothes
                     }
                     else
                     {
-                        commandParameter = new SqlParameter("image", DBLists.FabricList[Convert.ToInt32(index)].Image);
+                        commandParameter = new SqlParameter("image", SupportFabric.Image);
                         command.Parameters.Add(commandParameter);
                     }
 
-                    command.Parameters.Add(new SqlParameter("id",DBBuf.FabricBuf.Id));
+                    command.Parameters.Add(new SqlParameter("id", DBBuf.FabricBuf.Id));
                 }
                 else
                 {
-                    int amount = Convert.ToInt32(textBoxFabricAmount.Text);                    
-                    command.CommandText = "INSERT INTO Fabric (Colour, Name, Material, Texture, Amount, ImagePath, Cost_per_meter) " +
-                                          "VALUES (@colour, @name, @material, @texture, @amount, @imagePath, @costPerMeter)";
+                    int amount = Convert.ToInt32(textBoxFabricAmount.Text);
+                    int cost = Convert.ToInt32(textBoxFabricCost.Text);
+                    command.CommandText =
+                        "INSERT INTO Fabric (Colour, Name, Material, Texture, Amount, ImagePath, Cost_per_meter) " +
+                        "VALUES (@colour, @name, @material, @texture, @amount, @imagePath, @costPerMeter)";
                     SqlParameter FabricColour = new SqlParameter("@colour", textBoxColour.Text);
                     command.Parameters.Add(FabricColour);
                     SqlParameter FabricName = new SqlParameter("@name", textBoxFabricName.Text);
@@ -189,7 +226,7 @@ namespace SewingClothes
                         command.Parameters.Add(FabricImage);
                     }
 
-                    SqlParameter FabricCost = new SqlParameter("@costPerMeter", Convert.ToString(amount));
+                    SqlParameter FabricCost = new SqlParameter("@costPerMeter", Convert.ToString(cost));
                     command.Parameters.Add(FabricCost);
                 }
 
@@ -199,9 +236,17 @@ namespace SewingClothes
                 DBBuf.FabricBuf.Image = "";
 
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Заполните все поля.", "",MessageBoxButtons.OK);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Введите целое число.", "", MessageBoxButtons.OK);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Заполните хотя бы одно поле.", "", MessageBoxButtons.OK);
             }
         }
 
@@ -222,9 +267,9 @@ namespace SewingClothes
                 listViewAllFabrics.Items.Clear();
                 LoadFabric();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Данная ткань используется в заказе, удаление невозможно.","",MessageBoxButtons.OK);
             }
         }
 
@@ -245,6 +290,7 @@ namespace SewingClothes
             textBoxFabricName.Text = "";
             textBoxFabricTexture.Text = "";
             labelImageLoaded.Text = "Изображение не загружено";
+            DBBuf.FabricBuf = new Fabric();
         }
 
         private void buttonLoadImage_Click(object sender, EventArgs e)
@@ -256,7 +302,6 @@ namespace SewingClothes
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 // получаем выбранный файл
-                DBBuf.FabricBuf = new Fabric();
                 string filename = openFileDialog.FileName;
                 DBBuf.FabricBuf.Image = filename;
                 labelImageLoaded.Text = "Изображение загружено";
@@ -280,8 +325,7 @@ namespace SewingClothes
         private void listViewAllFabrics_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (listViewAllFabrics.SelectedIndices.Count == 1)
-            {
-                DBBuf.FabricBuf = new Fabric();
+            {                
                 long index = listViewAllFabrics.Items.IndexOf(listViewAllFabrics.SelectedItems[0]);
                 index = DBLists.FabricList[Convert.ToInt32(index)].Id;
                 DBBuf.FabricBuf.Id = index;

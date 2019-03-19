@@ -178,6 +178,7 @@ namespace SewingClothes
                 {
                     reader.Read();
                     DBBuf.ClothesBuf.Id = reader.GetInt64(0);
+                    DBBuf.ClothesBuf.IdFabric = reader.GetInt64(4);
                     DBBuf.ClothesBuf.IdClothesType = reader.GetInt64(2);
                 }
 
@@ -196,6 +197,23 @@ namespace SewingClothes
                     reader.Read();
                     labelClothesTypeDynamic.Text = reader.GetString(1);
                     labelGenderDynamic.Text = reader.GetString(2);
+                }
+
+                connection.Close();
+
+                command = new SqlCommand();
+                command.CommandText = "SELECT * FROM Fabric WHERE ID=@idFabric";
+                commandParameter = new SqlParameter("idFabric", DBBuf.ClothesBuf.IdFabric);
+                connection.Open();
+                command.Connection = connection;
+                command.Parameters.Add(commandParameter);
+
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    labelFabricColour.Text = reader.GetString(1);
+                    labelFabricName.Text = reader.GetString(2);
                 }
             }
             catch (SqlException ex)

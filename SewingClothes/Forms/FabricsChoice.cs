@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
 using SewingClothes.Class;
 
 namespace SewingClothes
@@ -76,6 +77,16 @@ namespace SewingClothes
             {
                 connection.Open();
 
+                ImageList imageList = new ImageList();
+                imageList.ImageSize = new Size(60, 50);
+                Bitmap emptyImage = new Bitmap(60, 50);
+                using (Graphics gr = Graphics.FromImage(emptyImage))
+                {
+                    gr.Clear(Color.White);
+                }
+                listViewAllFabrics.SmallImageList = imageList;
+
+
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount";
                 command.Connection = connection;
@@ -84,11 +95,11 @@ namespace SewingClothes
                 SqlDataReader reader = command.ExecuteReader();
 
                 DBLists.FabricList = new List<Fabric>();
-
+                int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
-                    {
+                    {                       
                         long id = reader.GetInt64(0);
                         string Colour = reader.GetString(1);
                         string Name = reader.GetString(2);
@@ -98,10 +109,20 @@ namespace SewingClothes
                         string ImagePath = reader.GetString(6);
                         long Cost = reader.GetInt64(7);
 
+                        if(ImagePath != "" && ImagePath != "-")
+                        imageList.Images.Add(new Bitmap(ImagePath));
+                        else
+                        {
+                            imageList.Images.Add(emptyImage);
+                        }
+
                         Fabric Element = new Fabric(id, Colour, Name, Material, Facture, Convert.ToInt32(Amount), ImagePath, Cost);
-                        string[] Fabric = { ImagePath, Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };
+                        string[] Fabric = {"", Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };                       
+                        ListViewItem lvi = new ListViewItem(Fabric);
+                        lvi.ImageIndex = i;
                         DBLists.FabricList.Add(Element);
-                        listViewAllFabrics.Items.Add(new ListViewItem(Fabric));
+                        listViewAllFabrics.Items.Add(lvi);
+                        i++;
                     }
                 }
             }
@@ -132,13 +153,24 @@ namespace SewingClothes
                     command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
                                           "Material = 'Лен' OR Material = 'Шелк' OR Material = 'Хлопок'";
 
+
                 command.Connection = connection;
                 SqlParameter AmountParameter = new SqlParameter("amount", DBBuf.FabricBuf.Amount);
                 command.Parameters.Add(AmountParameter);
+
+                ImageList imageList = new ImageList();
+                imageList.ImageSize = new Size(60, 50);
+                Bitmap emptyImage = new Bitmap(60, 50);
+                using (Graphics gr = Graphics.FromImage(emptyImage))
+                {
+                    gr.Clear(Color.White);
+                }
+                listViewRecommended.SmallImageList = imageList;
+
                 SqlDataReader reader = command.ExecuteReader();
 
                 DBLists.FabricListSupport = new List<Fabric>();
-
+                int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -152,10 +184,20 @@ namespace SewingClothes
                         string ImagePath = reader.GetString(6);
                         long Cost = reader.GetInt64(7);
 
+                        if (ImagePath != "" && ImagePath != "-")
+                            imageList.Images.Add(new Bitmap(ImagePath));
+                        else
+                        {
+                            imageList.Images.Add(emptyImage);
+                        }
+
                         Fabric Element = new Fabric(id, Colour, Name, Material, Facture, Convert.ToInt32(Amount), ImagePath, Cost);
-                        string[] Fabric = { ImagePath, Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };
+                        string[] Fabric = {"", Colour, Name, Material, Facture, Amount, Convert.ToString(Cost) };
+                        ListViewItem lvi = new ListViewItem(Fabric);
+                        lvi.ImageIndex = i;
+                        i++;
                         DBLists.FabricListSupport.Add(Element);
-                        listViewRecommended.Items.Add(new ListViewItem(Fabric));
+                        listViewRecommended.Items.Add(lvi);
                     }
                 }
             }
@@ -234,6 +276,10 @@ namespace SewingClothes
                 }
             }
             else if (DBBuf.ClothesTypeBuf.Purpose == "Брюки")
+            {
+                DBBuf.FabricBuf.Amount = 2;
+            }
+            else
             {
                 DBBuf.FabricBuf.Amount = 2;
             }

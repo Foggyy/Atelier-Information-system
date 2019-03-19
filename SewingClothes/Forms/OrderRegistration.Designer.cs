@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderRegistration));
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -106,28 +107,28 @@
             // 
             this.textBoxFIO.Location = new System.Drawing.Point(155, 60);
             this.textBoxFIO.Name = "textBoxFIO";
-            this.textBoxFIO.Size = new System.Drawing.Size(100, 22);
+            this.textBoxFIO.Size = new System.Drawing.Size(193, 22);
             this.textBoxFIO.TabIndex = 10;
             // 
             // textBoxAddress
             // 
             this.textBoxAddress.Location = new System.Drawing.Point(155, 98);
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(100, 22);
+            this.textBoxAddress.Size = new System.Drawing.Size(193, 22);
             this.textBoxAddress.TabIndex = 11;
             // 
             // textBoxPhoneNumber
             // 
             this.textBoxPhoneNumber.Location = new System.Drawing.Point(155, 132);
             this.textBoxPhoneNumber.Name = "textBoxPhoneNumber";
-            this.textBoxPhoneNumber.Size = new System.Drawing.Size(100, 22);
+            this.textBoxPhoneNumber.Size = new System.Drawing.Size(193, 22);
             this.textBoxPhoneNumber.TabIndex = 12;
             // 
             // textBoxEmail
             // 
             this.textBoxEmail.Location = new System.Drawing.Point(155, 167);
             this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(100, 22);
+            this.textBoxEmail.Size = new System.Drawing.Size(193, 22);
             this.textBoxEmail.TabIndex = 13;
             // 
             // label6
@@ -191,7 +192,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(344, 20);
+            this.label9.Location = new System.Drawing.Point(397, 20);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(146, 29);
             this.label9.TabIndex = 19;
@@ -200,7 +201,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(345, 98);
+            this.label10.Location = new System.Drawing.Point(398, 98);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(75, 17);
             this.label10.TabIndex = 20;
@@ -209,7 +210,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(346, 65);
+            this.label12.Location = new System.Drawing.Point(399, 65);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(141, 17);
             this.label12.TabIndex = 22;
@@ -218,7 +219,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(346, 135);
+            this.label13.Location = new System.Drawing.Point(399, 135);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(145, 17);
             this.label13.TabIndex = 23;
@@ -237,7 +238,7 @@
             // labelClothesCost
             // 
             this.labelClothesCost.AutoSize = true;
-            this.labelClothesCost.Location = new System.Drawing.Point(512, 65);
+            this.labelClothesCost.Location = new System.Drawing.Point(565, 65);
             this.labelClothesCost.Name = "labelClothesCost";
             this.labelClothesCost.Size = new System.Drawing.Size(13, 17);
             this.labelClothesCost.TabIndex = 25;
@@ -246,7 +247,7 @@
             // labelDeliveryCost
             // 
             this.labelDeliveryCost.AutoSize = true;
-            this.labelDeliveryCost.Location = new System.Drawing.Point(512, 101);
+            this.labelDeliveryCost.Location = new System.Drawing.Point(565, 101);
             this.labelDeliveryCost.Name = "labelDeliveryCost";
             this.labelDeliveryCost.Size = new System.Drawing.Size(13, 17);
             this.labelDeliveryCost.TabIndex = 26;
@@ -255,7 +256,7 @@
             // labelTotalCost
             // 
             this.labelTotalCost.AutoSize = true;
-            this.labelTotalCost.Location = new System.Drawing.Point(512, 137);
+            this.labelTotalCost.Location = new System.Drawing.Point(565, 137);
             this.labelTotalCost.Name = "labelTotalCost";
             this.labelTotalCost.Size = new System.Drawing.Size(13, 17);
             this.labelTotalCost.TabIndex = 28;
@@ -284,7 +285,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(342, 214);
+            this.label11.Location = new System.Drawing.Point(395, 214);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(108, 17);
             this.label11.TabIndex = 31;
@@ -293,7 +294,7 @@
             // labelDeliveryDate
             // 
             this.labelDeliveryDate.AutoSize = true;
-            this.labelDeliveryDate.Location = new System.Drawing.Point(512, 214);
+            this.labelDeliveryDate.Location = new System.Drawing.Point(565, 214);
             this.labelDeliveryDate.Name = "labelDeliveryDate";
             this.labelDeliveryDate.Size = new System.Drawing.Size(13, 17);
             this.labelDeliveryDate.TabIndex = 32;
@@ -303,6 +304,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(727, 452);
             this.Controls.Add(this.labelDeliveryDate);
             this.Controls.Add(this.label11);
@@ -330,7 +332,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OrderRegistration";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrderRegistration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderRegistration_FormClosing);
             this.ResumeLayout(false);

@@ -53,13 +53,24 @@ namespace SewingClothes
             {
                 connection.Open();
 
+                ImageList imageList = new ImageList();
+                imageList.ImageSize = new Size(60, 50);
+                Bitmap emptyImage = new Bitmap(60, 50);
+                using (Graphics gr = Graphics.FromImage(emptyImage))
+                {
+                    gr.Clear(Color.White);
+                }
+                listViewAccessories.SmallImageList = imageList;
+
+
+
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "SELECT * FROM Accessories WHERE Amount >= 1";
                 command.Connection = connection;
                 DBLists.AccessouriesList = new List<Accessouries>();
 
                 SqlDataReader reader = command.ExecuteReader();
-
+                int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -71,11 +82,21 @@ namespace SewingClothes
                         long CostPerUnit = reader.GetInt64(4);
                         string ImagePath = reader.GetString(5);
 
+                        if (ImagePath != "" && ImagePath != "-")
+                            imageList.Images.Add(new Bitmap(ImagePath));
+                        else
+                        {
+                            imageList.Images.Add(emptyImage);
+                        }
+
                         Accessouries Element = new Accessouries(Id, Type, Position, Amount, CostPerUnit, ImagePath);
                         string[] Accessories =
                             {"",Type, Convert.ToString(Position),Convert.ToString(Amount), Convert.ToString(CostPerUnit)};
 
-                        listViewAccessories.Items.Add(new ListViewItem(Accessories));
+                        ListViewItem lvi = new ListViewItem(Accessories);
+                        lvi.ImageIndex = i;
+                        i++;
+                        listViewAccessories.Items.Add(lvi);
 
                         DBLists.AccessouriesList.Add(Element);
                     }
@@ -95,6 +116,15 @@ namespace SewingClothes
             {
                 connection.Open();
 
+                ImageList imageList = new ImageList();
+                imageList.ImageSize = new Size(60, 50);
+                Bitmap emptyImage = new Bitmap(60, 50);
+                using (Graphics gr = Graphics.FromImage(emptyImage))
+                {
+                    gr.Clear(Color.White);
+                }
+                listViewRecommended.SmallImageList = imageList;
+
                 SqlCommand command = new SqlCommand();
                 if (DBBuf.ClothesTypeBuf.Purpose == "Рубашка")
                     command.CommandText = "SELECT * FROM Accessories WHERE Type != 'Пиджачный воротник' AND Position = 'Воротник' OR " +
@@ -113,7 +143,7 @@ namespace SewingClothes
                 DBLists.AccessouriesListSupport = new List<Accessouries>();
 
                 SqlDataReader reader = command.ExecuteReader();
-
+                int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -125,11 +155,20 @@ namespace SewingClothes
                         long CostPerUnit = reader.GetInt64(4);
                         string ImagePath = reader.GetString(5);
 
+                        if (ImagePath != "" && ImagePath != "-")
+                            imageList.Images.Add(new Bitmap(ImagePath));
+                        else
+                        {
+                            imageList.Images.Add(emptyImage);
+                        }
+
                         Accessouries Element = new Accessouries(Id, Type, Position, Amount, CostPerUnit, ImagePath);
                         string[] Accessories =
                             {"",Type, Convert.ToString(Position),Convert.ToString(Amount), Convert.ToString(CostPerUnit)};
-
-                        listViewRecommended.Items.Add(new ListViewItem(Accessories));
+                        ListViewItem lvi = new ListViewItem(Accessories);
+                        lvi.ImageIndex = i;
+                        i++;
+                        listViewRecommended.Items.Add(lvi);
 
                         DBLists.AccessouriesListSupport.Add(Element);
                     }

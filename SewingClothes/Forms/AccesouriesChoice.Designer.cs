@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccesouriesChoice));
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.listViewAccessories = new System.Windows.Forms.ListView();
@@ -172,6 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1023, 510);
             this.Controls.Add(this.listViewRecommended);
             this.Controls.Add(this.buttonReturnMenu);
@@ -179,7 +181,9 @@
             this.Controls.Add(this.listViewAccessories);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AccesouriesChoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор аксессуаров";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccesouriesChoice_FormClosing);
             this.ResumeLayout(false);

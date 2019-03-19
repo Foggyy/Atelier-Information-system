@@ -33,7 +33,7 @@ namespace SewingClothes.Forms
             
             Form2 frm = new Form2();
             frm.Show();
-            Close();
+            Hide();
 
         }
 

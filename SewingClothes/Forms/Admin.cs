@@ -33,7 +33,9 @@ namespace SewingClothes
 
         private void buttonChangeAccessories_Click(object sender, EventArgs e)
         {
-
+            AdminAccesouriesChange frm = new AdminAccesouriesChange();
+            frm.Show();
+            Hide();
         }
     }
 }

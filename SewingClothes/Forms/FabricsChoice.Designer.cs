@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FabricsChoice));
             this.label1 = new System.Windows.Forms.Label();
             this.listViewAllFabrics = new System.Windows.Forms.ListView();
             this.columnHeaderImage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -202,6 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1103, 558);
             this.Controls.Add(this.listViewRecommended);
             this.Controls.Add(this.label2);
@@ -209,7 +211,9 @@
             this.Controls.Add(this.buttonAddFabric);
             this.Controls.Add(this.listViewAllFabrics);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FabricsChoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор ткани";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FabricsChoice_FormClosing);
             this.ResumeLayout(false);

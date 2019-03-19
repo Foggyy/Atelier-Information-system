@@ -93,9 +93,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(229, 29);
+            this.label2.Size = new System.Drawing.Size(372, 29);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Добавление ткани";
+            this.label2.Text = "Добавление/Изменение ткани";
             // 
             // label3
             // 
@@ -152,9 +152,9 @@
             // 
             this.buttonAddFabric.Location = new System.Drawing.Point(785, 101);
             this.buttonAddFabric.Name = "buttonAddFabric";
-            this.buttonAddFabric.Size = new System.Drawing.Size(106, 66);
+            this.buttonAddFabric.Size = new System.Drawing.Size(154, 66);
             this.buttonAddFabric.TabIndex = 17;
-            this.buttonAddFabric.Text = "Добавить ткань";
+            this.buttonAddFabric.Text = "Добавить/Изменить ткань";
             this.buttonAddFabric.UseVisualStyleBackColor = true;
             this.buttonAddFabric.Click += new System.EventHandler(this.buttonAddFabric_Click);
             // 
@@ -280,6 +280,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1080, 528);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBoxColour);
@@ -302,6 +303,7 @@
             this.Controls.Add(this.buttonDeleteFabric);
             this.Controls.Add(this.label1);
             this.Name = "AdminFabricChange";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Изменение списка тканей";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminFabricChange_FormClosing);
             this.ResumeLayout(false);

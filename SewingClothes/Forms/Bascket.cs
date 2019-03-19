@@ -40,15 +40,37 @@ namespace SewingClothes
             long cost = DBBuf.FabricBuf.CostPerMeter * DBBuf.FabricBuf.Amount * Convert.ToInt64(textBoxClothesAmount.Text);
             labelFabricCost.Text = Convert.ToString(cost);
 
+
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(60, 50);
+            Bitmap emptyImage = new Bitmap(60, 50);
+            using (Graphics gr = Graphics.FromImage(emptyImage))
+            {
+                gr.Clear(Color.White);
+            }
+            listViewAccessories.SmallImageList = imageList;
+
             long sum = 0;
+            int i = 0;
             foreach (Accessouries Element in DBBuf.AccessouriesBufList)
             {
                 sum += Element.CostPerUnit;
 
+                if(Element.ImagePath != "" && Element.ImagePath != "-")
+                imageList.Images.Add(new Bitmap(Element.ImagePath));
+                else
+                {
+                    imageList.Images.Add(emptyImage);
+                }
+
                 string[] Accessories =
                     {"",Element.Type, Convert.ToString(Element.Position), Convert.ToString(Element.CostPerUnit)};
 
-                listViewAccessories.Items.Add(new ListViewItem(Accessories));
+                ListViewItem lvi = new ListViewItem(Accessories);
+                lvi.ImageIndex = i;
+                i++;
+                listViewAccessories.Items.Add(lvi);
+
             }
             labelAccessouriesCost.Text = Convert.ToString(sum);
             sum += cost;
