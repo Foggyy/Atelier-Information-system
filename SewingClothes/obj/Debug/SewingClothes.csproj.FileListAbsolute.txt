@@ -19,3 +19,13 @@ G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debu
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Bascket.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.Forms.OrderRegistration.resources
 G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.AdminAccesouriesChange.resources
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\ClosedXML.dll
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\DocumentFormat.OpenXml.dll
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\ExcelNumberFormat.dll
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\FastMember.dll
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\System.IO.Packaging.dll
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\ClosedXML.pdb
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\ClosedXML.xml
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\DocumentFormat.OpenXml.xml
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\ExcelNumberFormat.xml
+G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\obj\Debug\SewingClothes.csproj.CopyComplete

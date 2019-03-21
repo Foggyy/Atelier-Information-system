@@ -152,6 +152,12 @@ namespace SewingClothes
                 else if (DBBuf.ClothesTypeBuf.Purpose == "Брюки")
                     command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
                                           "Material = 'Лен' OR Material = 'Шелк' OR Material = 'Хлопок'";
+                else
+                {
+                    command.CommandText = "SELECT * FROM Fabric WHERE Amount >= @amount AND " +
+                                              "Material = 'Шелк' OR Material = 'Хлопок'";
+                }
+
 
 
                 command.Connection = connection;

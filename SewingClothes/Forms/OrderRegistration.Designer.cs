@@ -335,7 +335,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OrderRegistration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OrderRegistration";
+            this.Text = "Оформление заказа";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderRegistration_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminFabricChange));
             this.label1 = new System.Windows.Forms.Label();
             this.buttonDeleteFabric = new System.Windows.Forms.Button();
             this.buttonAdminBack = new System.Windows.Forms.Button();
@@ -55,6 +56,8 @@
             this.columnHeaderCost = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxColour = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonExcelOutput = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -150,7 +153,7 @@
             // 
             // buttonAddFabric
             // 
-            this.buttonAddFabric.Location = new System.Drawing.Point(785, 101);
+            this.buttonAddFabric.Location = new System.Drawing.Point(748, 101);
             this.buttonAddFabric.Name = "buttonAddFabric";
             this.buttonAddFabric.Size = new System.Drawing.Size(154, 66);
             this.buttonAddFabric.TabIndex = 17;
@@ -276,12 +279,34 @@
             this.label9.TabIndex = 26;
             this.label9.Text = "Цвет";
             // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(905, 301);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(149, 86);
+            this.buttonCancel.TabIndex = 27;
+            this.buttonCancel.Text = "Отменить выделение ткани";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonExcelOutput
+            // 
+            this.buttonExcelOutput.Location = new System.Drawing.Point(900, 450);
+            this.buttonExcelOutput.Name = "buttonExcelOutput";
+            this.buttonExcelOutput.Size = new System.Drawing.Size(154, 66);
+            this.buttonExcelOutput.TabIndex = 28;
+            this.buttonExcelOutput.Text = "Вывод данных в Excel файл";
+            this.buttonExcelOutput.UseVisualStyleBackColor = true;
+            this.buttonExcelOutput.Click += new System.EventHandler(this.buttonExcelOutput_Click);
+            // 
             // AdminFabricChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1080, 528);
+            this.Controls.Add(this.buttonExcelOutput);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBoxColour);
             this.Controls.Add(this.listViewAllFabrics);
@@ -302,6 +327,7 @@
             this.Controls.Add(this.buttonAdminBack);
             this.Controls.Add(this.buttonDeleteFabric);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdminFabricChange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Изменение списка тканей";
@@ -339,5 +365,7 @@
         private System.Windows.Forms.ColumnHeader columnHeaderCost;
         private System.Windows.Forms.TextBox textBoxColour;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonExcelOutput;
     }
 }

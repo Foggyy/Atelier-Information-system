@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 using SewingClothes.Class;
 
 namespace SewingClothes
@@ -43,7 +39,6 @@ namespace SewingClothes
                 command.Connection = connection;
                 SqlDataReader reader = command.ExecuteReader();
 
-                DBLists.FabricList = new List<Fabric>();
                 int i = 0;
                 if (reader.HasRows)
                 {
@@ -71,7 +66,6 @@ namespace SewingClothes
 
                         ListViewItem lvi = new ListViewItem(Fabric);
                         lvi.ImageIndex = i;
-                        DBLists.FabricList.Add(Element);
                         listViewAllFabrics.Items.Add(lvi);
                         i++;
                     }
@@ -110,7 +104,8 @@ namespace SewingClothes
                     {
                         if (Element.Id == index)
                         {
-                            SupportFabric = new Fabric(Element.Id,Element.Colour,Element.Name,Element.Material,Element.Facture,Element.Amount,Element.Image,Element.CostPerMeter);
+                            SupportFabric = new Fabric(Element.Id,Element.Colour,Element.Name,Element.Material,
+                                Element.Facture,Element.Amount,Element.Image,Element.CostPerMeter);
                         }
                     }
 
@@ -330,6 +325,64 @@ namespace SewingClothes
                 index = DBLists.FabricList[Convert.ToInt32(index)].Id;
                 DBBuf.FabricBuf.Id = index;
             }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            listViewAllFabrics.SelectedIndices.Clear();
+        }
+
+        private void buttonExcelOutput_Click(object sender, EventArgs e)
+        {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.InitialDirectory = Application.StartupPath + @"\Reports\Fabric";
+                sfd.Filter = "xlsx (*.xlsx)|*.xlsx|xls (*.xls)|*.xls";
+                if (sfd.ShowDialog(this) == DialogResult.OK)
+                {
+                    // получаем выбранный файл
+                    string filename = sfd.FileName;
+                XLWorkbook book = new XLWorkbook();
+                var sheet = book.Worksheets.Add("Ткани");
+
+                sheet.Cell("B2").Value = "Список тканей";
+                sheet.Cell("B3").Value = "ID";
+                sheet.Cell("C3").Value = "Цвет";
+                sheet.Cell("D3").Value = "Имя";
+                sheet.Cell("E3").Value = "Материал";
+                sheet.Cell("F3").Value = "Фактура";
+                sheet.Cell("G3").Value = "Количество";
+                sheet.Cell("H3").Value = "Стоимость за метр";
+                sheet.Cell("I3").Value = "Путь изображения";
+
+                int i = 4;
+                foreach (Fabric Element in DBLists.FabricList)
+                {
+                    sheet.Cell(String.Format("B{0}", i)).Value = Element.Id;
+                    sheet.Cell(String.Format("C{0}", i)).Value = Element.Colour;
+                    sheet.Cell(String.Format("D{0}", i)).Value = Element.Name;
+                    sheet.Cell(String.Format("E{0}", i)).Value = Element.Material;
+                    sheet.Cell(String.Format("F{0}", i)).Value = Element.Facture;
+                    sheet.Cell(String.Format("G{0}", i)).Value = Element.Amount;
+                    sheet.Cell(String.Format("H{0}", i)).Value = Element.CostPerMeter;
+                    sheet.Cell(String.Format("I{0}", i)).Value = Element.Image;
+                    i++;
+                }
+
+                var TableRamka = sheet.Range(String.Format("B2:I{0}", i));
+                var TableHeader = sheet.Range("A2:I2");
+                TableHeader.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                TableHeader.Style.Font.Bold = true;
+                TableRamka.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                TableRamka.Cell(1, 1).Style.Font.Bold = true;
+                TableRamka.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
+                TableRamka.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                TableRamka.Row(1).Merge();
+                TableRamka.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+                sheet.Columns(2, i).AdjustToContents();
+                book.SaveAs(filename);
+
+                    MessageBox.Show("Отчет создан");
+                }                       
         }
     }
 }

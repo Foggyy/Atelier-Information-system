@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SewingClothes.Class;
 using System.Data.SqlClient;
-using System.Globalization;
 
 namespace SewingClothes.Forms
 {
@@ -92,7 +84,6 @@ namespace SewingClothes.Forms
             SqlConnection connection = new SqlConnection(Connection.connectionString);
             try
             {
-                long value = 0;
                 connection.Open();
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "INSERT INTO Payment (Payment_method) VALUES (@PaymentType);SELECT SCOPE_IDENTITY()";
@@ -120,7 +111,8 @@ namespace SewingClothes.Forms
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand();
-                command.CommandText = ("INSERT INTO Delivery (Type, Cost, DateOfDelivery) VALUES (@type, @cost, @dateOfDelivery);SELECT SCOPE_IDENTITY()");
+                command.CommandText = ("INSERT INTO Delivery (Type, Cost, DateOfDelivery) VALUES (@type, @cost, @dateOfDelivery)" +
+                                       ";SELECT SCOPE_IDENTITY()");
                 command.Connection = connection;
                 SqlParameter DeliveryType = new SqlParameter("@type", DBBuf.DeliveryBuf.Type);
                 command.Parameters.Add(DeliveryType);
@@ -246,7 +238,6 @@ namespace SewingClothes.Forms
             SqlConnection connection = new SqlConnection(Connection.connectionString);
             try
             {
-                long value = 0;
                 connection.Open();
                 SqlCommand command = new SqlCommand();
                 command.CommandText = "UPDATE Accessories SET Amount = Amount - @amount WHERE ID = @id";

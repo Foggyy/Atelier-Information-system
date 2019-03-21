@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminAccesouriesChange));
             this.label6 = new System.Windows.Forms.Label();
             this.listViewAccessouries = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonDeleteAccessourie = new System.Windows.Forms.Button();
             this.buttonReturnAdmin = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -48,7 +50,8 @@
             this.labelPosition = new System.Windows.Forms.Label();
             this.labelType = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonExcelOutput = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label6
@@ -98,6 +101,11 @@
             // 
             this.columnHeader4.Text = "Стоимость";
             this.columnHeader4.Width = 145;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Количество";
+            this.columnHeader5.Width = 138;
             // 
             // buttonDeleteAccessourie
             // 
@@ -222,10 +230,25 @@
             this.label2.TabIndex = 32;
             this.label2.Text = "Добавление/Изменение аксессуара";
             // 
-            // columnHeader5
+            // buttonCancel
             // 
-            this.columnHeader5.Text = "Количество";
-            this.columnHeader5.Width = 138;
+            this.buttonCancel.Location = new System.Drawing.Point(857, 288);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(149, 86);
+            this.buttonCancel.TabIndex = 48;
+            this.buttonCancel.Text = "Отменить выделение ткани";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonExcelOutput
+            // 
+            this.buttonExcelOutput.Location = new System.Drawing.Point(857, 480);
+            this.buttonExcelOutput.Name = "buttonExcelOutput";
+            this.buttonExcelOutput.Size = new System.Drawing.Size(154, 66);
+            this.buttonExcelOutput.TabIndex = 49;
+            this.buttonExcelOutput.Text = "Вывод данных в Excel файл";
+            this.buttonExcelOutput.UseVisualStyleBackColor = true;
+            this.buttonExcelOutput.Click += new System.EventHandler(this.buttonExcelOutput_Click);
             // 
             // AdminAccesouriesChange
             // 
@@ -233,6 +256,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1116, 558);
+            this.Controls.Add(this.buttonExcelOutput);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBoxCost);
             this.Controls.Add(this.label1);
@@ -249,6 +274,7 @@
             this.Controls.Add(this.buttonDeleteAccessourie);
             this.Controls.Add(this.listViewAccessouries);
             this.Controls.Add(this.label6);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdminAccesouriesChange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Изменение списка аксессуаров";
@@ -281,5 +307,7 @@
         private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonExcelOutput;
     }
 }

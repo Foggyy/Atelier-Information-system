@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderList));
             this.label2 = new System.Windows.Forms.Label();
             this.listViewOrders = new System.Windows.Forms.ListView();
             this.columnHeader0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,6 +55,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.labelFabricName = new System.Windows.Forms.Label();
             this.labelFabricColour = new System.Windows.Forms.Label();
+            this.buttonExcelOutput = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -283,12 +285,23 @@
             this.labelFabricColour.TabIndex = 31;
             this.labelFabricColour.Text = "-";
             // 
+            // buttonExcelOutput
+            // 
+            this.buttonExcelOutput.Location = new System.Drawing.Point(1212, 323);
+            this.buttonExcelOutput.Name = "buttonExcelOutput";
+            this.buttonExcelOutput.Size = new System.Drawing.Size(154, 66);
+            this.buttonExcelOutput.TabIndex = 50;
+            this.buttonExcelOutput.Text = "Вывод данных в Excel файл";
+            this.buttonExcelOutput.UseVisualStyleBackColor = true;
+            this.buttonExcelOutput.Click += new System.EventHandler(this.buttonExcelOutput_Click);
+            // 
             // OrderList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1378, 417);
+            this.Controls.Add(this.buttonExcelOutput);
             this.Controls.Add(this.labelFabricColour);
             this.Controls.Add(this.labelFabricName);
             this.Controls.Add(this.label4);
@@ -310,6 +323,7 @@
             this.Controls.Add(this.buttonCancelOrder);
             this.Controls.Add(this.listViewOrders);
             this.Controls.Add(this.label2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OrderList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Список заказов";
@@ -347,5 +361,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelFabricName;
         private System.Windows.Forms.Label labelFabricColour;
+        private System.Windows.Forms.Button buttonExcelOutput;
     }
 }

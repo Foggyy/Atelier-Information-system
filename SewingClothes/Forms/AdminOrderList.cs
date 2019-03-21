@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using ClosedXML.Excel;
 using SewingClothes.Class;
 
 namespace SewingClothes
@@ -304,6 +299,53 @@ namespace SewingClothes
         {
             if (e.CloseReason == CloseReason.UserClosing)
                 Application.Exit();
+        }
+
+        private void buttonExcelOutput_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath + @"\Reports\Orders";
+            sfd.Filter = "xlsx (*.xlsx)|*.xlsx|xls (*.xls)|*.xls";
+            if (sfd.ShowDialog(this) == DialogResult.OK)
+            {
+                // получаем выбранный файл
+                string filename = sfd.FileName;
+                XLWorkbook book = new XLWorkbook();
+                var sheet = book.Worksheets.Add("Заказы");
+
+                sheet.Cell("B2").Value = "Список тканей";
+                sheet.Cell("B3").Value = "ID";
+                sheet.Cell("C3").Value = "ФИО";
+                sheet.Cell("D3").Value = "Адрес";
+                sheet.Cell("E3").Value = "E-mail";
+                sheet.Cell("F3").Value = "ID Заказа";
+
+                int i = 4;
+                foreach (Customer Element in DBLists.CustomerList)
+                {
+                    sheet.Cell(String.Format("B{0}", i)).Value = Element.Id;
+                    sheet.Cell(String.Format("C{0}", i)).Value = Element.FIO;
+                    sheet.Cell(String.Format("D{0}", i)).Value = Element.Address;
+                    sheet.Cell(String.Format("E{0}", i)).Value = Element.Email;
+                    sheet.Cell(String.Format("F{0}", i)).Value = Element.IdOrder;
+                    i++;
+                }
+
+                var TableRamka = sheet.Range(String.Format("B2:F{0}", i));
+                var TableHeader = sheet.Range("A2:F2");
+                TableHeader.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                TableHeader.Style.Font.Bold = true;
+                TableRamka.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                TableRamka.Cell(1, 1).Style.Font.Bold = true;
+                TableRamka.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
+                TableRamka.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                TableRamka.Row(1).Merge();
+                TableRamka.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+                sheet.Columns(2, i).AdjustToContents();
+                book.SaveAs(filename);
+
+                MessageBox.Show("Отчет создан");
+            }
         }
     }
 }

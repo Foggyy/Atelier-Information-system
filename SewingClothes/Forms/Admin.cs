@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SewingClothes
@@ -28,7 +21,7 @@ namespace SewingClothes
         {
             AdminFabricChange frm = new AdminFabricChange();
             frm.Show();
-            Close();
+            Hide();
         }
 
         private void buttonChangeAccessories_Click(object sender, EventArgs e)
@@ -36,6 +29,19 @@ namespace SewingClothes
             AdminAccesouriesChange frm = new AdminAccesouriesChange();
             frm.Show();
             Hide();
+        }
+
+        private void buttonInterfaceBack_Click(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            frm.Show();
+            Hide();
+        }
+
+        private void Admin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                Application.Exit();
         }
     }
 }

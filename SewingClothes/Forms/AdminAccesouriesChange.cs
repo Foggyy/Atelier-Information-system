@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 using SewingClothes.Class;
 
 namespace SewingClothes
@@ -290,6 +286,61 @@ namespace SewingClothes
                 long index = listViewAccessouries.Items.IndexOf(listViewAccessouries.SelectedItems[0]);
                 index = DBLists.AccessouriesList[Convert.ToInt32(index)].Id;
                 DBBuf.AccessouriesBuf.Id = index;
+            }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            listViewAccessouries.SelectedIndices.Clear();
+        }
+
+        private void buttonExcelOutput_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath + @"\Reports\Accessories";
+            sfd.Filter = "xlsx (*.xlsx)|*.xlsx|xls (*.xls)|*.xls";
+            if (sfd.ShowDialog(this) == DialogResult.OK)
+            {
+                // получаем выбранный файл
+                string filename = sfd.FileName;
+                XLWorkbook book = new XLWorkbook();
+                var sheet = book.Worksheets.Add("Аксессуары");
+
+                sheet.Cell("B2").Value = "Список аксессуаров";
+                sheet.Cell("B3").Value = "ID";
+                sheet.Cell("C3").Value = "Тип";
+                sheet.Cell("D3").Value = "Положение";
+                sheet.Cell("E3").Value = "Количество";
+                sheet.Cell("F3").Value = "Цена за единицу";
+                sheet.Cell("G3").Value = "Путь изображения";
+
+
+                int i = 4;
+                foreach (Accessouries Element in DBLists.AccessouriesList)
+                {
+                    sheet.Cell(String.Format("B{0}", i)).Value = Element.Id;
+                    sheet.Cell(String.Format("C{0}", i)).Value = Element.Type;
+                    sheet.Cell(String.Format("D{0}", i)).Value = Element.Position;
+                    sheet.Cell(String.Format("E{0}", i)).Value = Element.Amount;
+                    sheet.Cell(String.Format("F{0}", i)).Value = Element.CostPerUnit;
+                    sheet.Cell(String.Format("G{0}", i)).Value = Element.ImagePath;
+                    i++;
+                }
+
+                var TableRamka = sheet.Range(String.Format("B2:G{0}", i));
+                var TableHeader = sheet.Range("A2:G2");
+                TableHeader.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                TableHeader.Style.Font.Bold = true;
+                TableRamka.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                TableRamka.Cell(1, 1).Style.Font.Bold = true;
+                TableRamka.Cell(1, 1).Style.Fill.BackgroundColor = XLColor.CornflowerBlue;
+                TableRamka.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                TableRamka.Row(1).Merge();
+                TableRamka.Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+                sheet.Columns(2, i).AdjustToContents();
+                book.SaveAs(filename);
+
+                MessageBox.Show("Отчет создан");
             }
         }
     }

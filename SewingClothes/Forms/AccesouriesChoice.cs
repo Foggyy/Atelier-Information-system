@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using SewingClothes.Class;
@@ -138,6 +133,11 @@ namespace SewingClothes
                 else if (DBBuf.ClothesTypeBuf.Purpose == "Брюки")
                     command.CommandText = "SELECT * FROM Accessories WHERE Position = 'Левый бок' OR Position = 'Правый бок' OR " +
                                           "Type = 'Пуговицы' OR Type = 'Молния'";
+                else
+                {
+                    command.CommandText = "SELECT * FROM Accessories WHERE Type = 'Пуговицы' OR Type = 'Молния'";
+
+                }
 
                 command.Connection = connection;
                 DBLists.AccessouriesListSupport = new List<Accessouries>();

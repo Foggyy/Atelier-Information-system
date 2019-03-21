@@ -33,6 +33,7 @@
             this.buttonChangeAccessories = new System.Windows.Forms.Button();
             this.buttonOrdersList = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.buttonInterfaceBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonChangeFabric
@@ -74,12 +75,23 @@
             this.button4.Text = "Конструктор запросов";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // buttonInterfaceBack
+            // 
+            this.buttonInterfaceBack.Location = new System.Drawing.Point(12, 371);
+            this.buttonInterfaceBack.Name = "buttonInterfaceBack";
+            this.buttonInterfaceBack.Size = new System.Drawing.Size(132, 60);
+            this.buttonInterfaceBack.TabIndex = 6;
+            this.buttonInterfaceBack.Text = "Вернуться к выбору интерфейса";
+            this.buttonInterfaceBack.UseVisualStyleBackColor = true;
+            this.buttonInterfaceBack.Click += new System.EventHandler(this.buttonInterfaceBack_Click);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(570, 443);
+            this.Controls.Add(this.buttonInterfaceBack);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.buttonOrdersList);
             this.Controls.Add(this.buttonChangeAccessories);
@@ -87,7 +99,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Admin";
+            this.Text = "Администратор";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Admin_FormClosing);
             this.ResumeLayout(false);
 
         }
@@ -98,5 +111,6 @@
         private System.Windows.Forms.Button buttonChangeAccessories;
         private System.Windows.Forms.Button buttonOrdersList;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonInterfaceBack;
     }
 }
