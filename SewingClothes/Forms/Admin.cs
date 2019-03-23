@@ -43,5 +43,12 @@ namespace SewingClothes
             if (e.CloseReason == CloseReason.UserClosing)
                 Application.Exit();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            RequestConstructor frm = new RequestConstructor();
+            frm.Show();
+            Hide();
+        }
     }
 }

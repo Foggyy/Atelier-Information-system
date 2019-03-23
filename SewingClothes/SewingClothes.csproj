@@ -73,6 +73,7 @@
     <Compile Include="Class\ClothesProperties.cs" />
     <Compile Include="Class\ClothesType.cs" />
     <Compile Include="Class\Customer.cs" />
+    <Compile Include="Class\DataCondition.cs" />
     <Compile Include="Class\DBBuf.cs" />
     <Compile Include="Class\DBLists.cs" />
     <Compile Include="Class\Delivery.cs" />
