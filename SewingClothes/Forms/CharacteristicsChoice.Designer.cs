@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.buttonReturnMenu = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxClothes = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClothes)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonReturnMenu
@@ -59,15 +59,15 @@
             this.buttonReturnMenu.UseVisualStyleBackColor = true;
             this.buttonReturnMenu.Click += new System.EventHandler(this.buttonReturnMenu_Click);
             // 
-            // pictureBox1
+            // pictureBoxClothes
             // 
-            this.pictureBox1.Image = global::SewingClothes.Properties.Resources._12186_womans_clothes_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(436, 51);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(252, 267);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxClothes.Image = global::SewingClothes.Properties.Resources._12186_womans_clothes_icon;
+            this.pictureBoxClothes.Location = new System.Drawing.Point(436, 51);
+            this.pictureBoxClothes.Name = "pictureBoxClothes";
+            this.pictureBoxClothes.Size = new System.Drawing.Size(252, 267);
+            this.pictureBoxClothes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxClothes.TabIndex = 1;
+            this.pictureBoxClothes.TabStop = false;
             // 
             // label1
             // 
@@ -108,6 +108,7 @@
             this.comboBoxPurpose.Name = "comboBoxPurpose";
             this.comboBoxPurpose.Size = new System.Drawing.Size(121, 24);
             this.comboBoxPurpose.TabIndex = 5;
+            this.comboBoxPurpose.SelectedIndexChanged += new System.EventHandler(this.comboBoxPurpose_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -225,14 +226,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxGender);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxClothes);
             this.Controls.Add(this.buttonReturnMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор характеристик одежды";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClothes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,7 +242,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonReturnMenu;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxClothes;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxGender;
         private System.Windows.Forms.Label label2;

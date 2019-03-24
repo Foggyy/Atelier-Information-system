@@ -322,6 +322,12 @@ namespace SewingClothes
             if (listViewAllFabrics.SelectedIndices.Count == 1)
             {                
                 long index = listViewAllFabrics.Items.IndexOf(listViewAllFabrics.SelectedItems[0]);
+                textBoxColour.Text = DBLists.FabricList[Convert.ToInt32(index)].Colour;
+                textBoxFabricName.Text = DBLists.FabricList[Convert.ToInt32(index)].Name;
+                textBoxFabricMaterial.Text = DBLists.FabricList[Convert.ToInt32(index)].Material;
+                textBoxFabricTexture.Text = DBLists.FabricList[Convert.ToInt32(index)].Facture;
+                textBoxFabricCost.Text = Convert.ToString(DBLists.FabricList[Convert.ToInt32(index)].CostPerMeter);
+                textBoxFabricAmount.Text = Convert.ToString(DBLists.FabricList[Convert.ToInt32(index)].Amount);
                 index = DBLists.FabricList[Convert.ToInt32(index)].Id;
                 DBBuf.FabricBuf.Id = index;
             }
@@ -330,6 +336,12 @@ namespace SewingClothes
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             listViewAllFabrics.SelectedIndices.Clear();
+            textBoxColour.Text = "";
+            textBoxFabricName.Text = "";
+            textBoxFabricMaterial.Text = "";
+            textBoxFabricTexture.Text = "";
+            textBoxFabricCost.Text = "";
+            textBoxFabricAmount.Text = "";
         }
 
         private void buttonExcelOutput_Click(object sender, EventArgs e)

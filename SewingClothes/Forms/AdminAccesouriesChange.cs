@@ -284,14 +284,23 @@ namespace SewingClothes
             if (listViewAccessouries.SelectedIndices.Count == 1)
             {
                 long index = listViewAccessouries.Items.IndexOf(listViewAccessouries.SelectedItems[0]);
+                textBoxType.Text = DBLists.AccessouriesList[Convert.ToInt32(index)].Type;
+                textBoxPosition.Text = DBLists.AccessouriesList[Convert.ToInt32(index)].Position;
+                textBoxAmount.Text = Convert.ToString(DBLists.AccessouriesList[Convert.ToInt32(index)].Amount);
+                textBoxCost.Text = Convert.ToString(DBLists.AccessouriesList[Convert.ToInt32(index)].CostPerUnit);
                 index = DBLists.AccessouriesList[Convert.ToInt32(index)].Id;
                 DBBuf.AccessouriesBuf.Id = index;
+               
             }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             listViewAccessouries.SelectedIndices.Clear();
+            textBoxType.Text = "";
+            textBoxPosition.Text = "";
+            textBoxAmount.Text = "";
+            textBoxCost.Text = "";
         }
 
         private void buttonExcelOutput_Click(object sender, EventArgs e)

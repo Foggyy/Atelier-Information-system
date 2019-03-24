@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
 using SewingClothes.Class;
 
 namespace SewingClothes
@@ -213,10 +214,65 @@ namespace SewingClothes
             
         }
 
+        public void LoadImage()
+        {
+            if (comboBoxPurpose.SelectedItem.ToString() == "Пиджак" && comboBoxGender.SelectedItem.ToString() == "Мужской")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\MPidjak.jpg");
+            }
+            else if(comboBoxPurpose.SelectedItem.ToString() == "Пиджак" && comboBoxGender.SelectedItem.ToString() == "Женский")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\JPidjak.jpg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Рубашка" &&
+                     comboBoxGender.SelectedItem.ToString() == "Мужской")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\MShirt.jpg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Рубашка" &&
+                     comboBoxGender.SelectedItem.ToString() == "Женский")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\JShirt.jpg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Жилет" &&
+                     comboBoxGender.SelectedItem.ToString() == "Мужской")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\MJacket.jpg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Жилет" &&
+                     comboBoxGender.SelectedItem.ToString() == "Женский")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\JJacket.jpeg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Брюки" &&
+                     comboBoxGender.SelectedItem.ToString() == "Мужской")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\MBruki.jpg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Брюки" &&
+                     comboBoxGender.SelectedItem.ToString() == "Женский")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\JBruki.jpg");
+            }
+            else if (comboBoxPurpose.SelectedItem.ToString() == "Юбка")
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\Ubka.jpg");
+            }
+            else
+            {
+                pictureBoxClothes.Image = Image.FromFile(@"G:\Универ\2 курс\Курсовая\SewingClothes\SewingClothes\bin\Debug\Images\Clothes\Else.png");
+            }
+        }
+
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
                 Application.Exit();
+        }
+
+        private void comboBoxPurpose_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadImage();
         }
     }
 

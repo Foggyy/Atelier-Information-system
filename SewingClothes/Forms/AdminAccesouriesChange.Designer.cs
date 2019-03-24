@@ -236,7 +236,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(149, 86);
             this.buttonCancel.TabIndex = 48;
-            this.buttonCancel.Text = "Отменить выделение ткани";
+            this.buttonCancel.Text = "Отменить выделение аксессуара";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 

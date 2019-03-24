@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using DocumentFormat.OpenXml.Spreadsheet;
 using SewingClothes.Class;
 
 namespace SewingClothes
@@ -199,7 +193,6 @@ namespace SewingClothes
                     break;
                 }
             }
-
             if (ok)
             {
                 for (int i = 0; i < FieldsValues.Count; i++)
@@ -215,9 +208,7 @@ namespace SewingClothes
                     }
                 }
             }
-
             SqlConnection connection = new SqlConnection(Connection.connectionString);
-
             try
             {
                 connection.Open();
